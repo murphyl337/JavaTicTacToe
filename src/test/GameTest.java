@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -48,4 +49,21 @@ public class GameTest {
 		bestScore = game.getDefaultBestScore(player2);
 		assertEquals(Integer.MAX_VALUE, bestScore);
 	}
+	
+	@Test
+	public void isBestScoreForPlayer1IsTrueForScoreGreaterThanBestScore(){
+		int score = 1;
+		int bestScore = game.getDefaultBestScore(player1);
+		
+		assertTrue(game.isBestScore(score, bestScore, player1));
+	}
+	
+	@Test
+	public void isBestScoreForPlayer2IsTrueForScoreLessThanBestScore(){
+		int score = -1;
+		int bestScore = game.getDefaultBestScore(player2);
+		
+		assertTrue(game.isBestScore(score, bestScore, player2));
+	} 
+	
 }

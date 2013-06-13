@@ -109,7 +109,6 @@ public class BoardTest {
 	
 	@Test
 	public void isGameOverReturnsFalseWhenNoWinnerAndNoDraw(){
-		System.out.println(board.toString());
 		assertEquals(false, board.isGameOver());
 	}
 	

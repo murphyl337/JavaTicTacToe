@@ -20,6 +20,22 @@ public class Game {
 		getBoard().state[move.row][move.col] = player.getMarker();
 	}
 	
+	public int getDefaultBestScore(Player player) {
+		if(player == getPlayer1()) return Integer.MIN_VALUE;
+		return Integer.MAX_VALUE;
+	}
+	
+	public boolean isBestScore(int score, int bestScore, Player player) {
+		boolean isBestScore = false;
+        if(player == getPlayer1()){
+            if(score > bestScore) isBestScore = true;
+        }
+        else if(player == getPlayer2()){
+            if(score < bestScore) isBestScore = true;
+        }
+        return isBestScore;
+	}
+
 	public Board getBoard() {
 		return board;
 	}
@@ -40,9 +56,8 @@ public class Game {
 		this.player2 = player2;
 	}
 
-	public int getDefaultBestScore(Player player) {
-		if(player == getPlayer1()) return Integer.MIN_VALUE;
-		return Integer.MAX_VALUE;
-	}
+
+
+	
 
 }
