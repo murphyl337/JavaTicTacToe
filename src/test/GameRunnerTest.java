@@ -1,13 +1,14 @@
 package test;
 
-import static org.junit.Assert.*;
-
-import org.junit.Test;
-import org.mockito.*;
+import org.junit.Before;
 
 import source.GameRunner;
 
 public class GameRunnerTest {
-	GameRunner runner = new GameRunner();
-
+	GameRunner runner;
+	
+	@Before
+	public void before(){
+		runner = new GameRunner();
+	}
 }

@@ -33,7 +33,7 @@ public class BoardTest {
 	}
 
 	@Test
-	public void printsBoardNiceley(){
+	public void printsBoardNicely(){
 		String boardView = board.print();
 		String expected = "[][][]\n[][][]\n[][][]";
 		assert(boardView.equals(expected));
