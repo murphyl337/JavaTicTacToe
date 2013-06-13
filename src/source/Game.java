@@ -4,6 +4,7 @@ import source.Game.Move;
 
 public class Game {
 	private Board board;
+	private Player player1, player2;
 	
 	public class Move{
 		public int row;
@@ -15,8 +16,10 @@ public class Game {
 		}
 	}
 
-	public Game(Board board) {
+	public Game(Board board, Player player1, Player player2) {
 		this.board = board;
+		this.setPlayer1(player1);
+		this.setPlayer2(player2);
 	}
 
 	public Board getBoard() {
@@ -28,19 +31,22 @@ public class Game {
 		getBoard().state[move.row][move.col] = player.getMarker();
 	}
 
-	public boolean isWinner(String marker) {
-		return isWinnerHorizontally(marker);
+	
+
+	public Player getPlayer1() {
+		return player1;
 	}
 
-	public boolean isWinnerHorizontally(String marker) {
-		boolean winner = true;
+	public void setPlayer1(Player player1) {
+		this.player1 = player1;
+	}
 
-		for(int col=0; col<3; col++){
-			if(!board.state[0][col].equals(marker))
-				winner = false;
-		}
+	public Player getPlayer2() {
+		return player2;
+	}
 
-		return winner;
+	public void setPlayer2(Player player2) {
+		this.player2 = player2;
 	}
 
 }

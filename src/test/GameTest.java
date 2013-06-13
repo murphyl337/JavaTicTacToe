@@ -19,8 +19,8 @@ public class GameTest {
 	public void before(){
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "computer");
-		board = new Board(player1, player2);
-		game = new Game(board);
+		board = new Board();
+		game = new Game(board, player1, player2);
 		move = game.new Move(0,0);
 	}
 	
@@ -37,17 +37,4 @@ public class GameTest {
 		
 		assertEquals("X", game.getBoard().state[0][0]);
 	}
-	
-	@Test
-	public void winHorizontallyReturnsTrueForWinnerByRow(){
-		for(int col=0; col<3; col++){
-			move.row = 0;
-			move.col = col;
-			game.takeTurn(player1, move);
-		}
-		
-		assertEquals(true, game.isWinnerHorizontally(player1.getMarker()));
-	}
-	
-
 }

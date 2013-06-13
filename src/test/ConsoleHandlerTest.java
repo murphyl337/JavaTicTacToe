@@ -14,11 +14,6 @@ public class ConsoleHandlerTest {
 	public void before(){
 		consoleHelper = new ConsoleHelper();
 	}
-
-	@Test
-	public void createsPlayerFromInput() {
-		fail("not implemented");
-	}
 	
 	@Test
 	public void determinePlayerTypeHandlesCorrectInput(){
