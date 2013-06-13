@@ -32,33 +32,33 @@ public class BoardTest {
 	public void boardIsEmptyWhenInstantiated() {
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				assertEquals ("", board.state[row][col]);
+				assertEquals("", board.state[row][col]);
 				assertNotNull(board.state[row][col]);
 			}
 		}
 	}
 
 	@Test
-	public void isValidMoveReturnTest(){
+	public void isValidMoveReturnTest() {
 		assertTrue(board.isValidMove(move));
-		
+
 		board.update("X", move);
-		
+
 		assertFalse(board.isValidMove(move));
 	}
-	
+
 	@Test
 	public void toStringReturnsNicelyFormattedBoard() {
 		String boardView = board.toString();
 		String expected = "[][][]\n[][][]\n[][][]";
 		assert (boardView.equals(expected));
 	}
-	
+
 	@Test
-	public void copyConstructedBoardDoesNotUpdateOriginalBoard(){
+	public void copyConstructedBoardDoesNotUpdateOriginalBoard() {
 		Board clone = board.copy();
 		clone.update("X", move);
-		
+
 		assertEquals("", board.state[0][0]);
 		assertEquals("X", clone.state[0][0]);
 	}
@@ -95,76 +95,65 @@ public class BoardTest {
 
 		assertEquals(true, board.isWinnerDiagonally("X"));
 	}
-	
+
 	@Test
-	public void winDiagonallyReturnsTrueForTopRightToBottomLeftWin(){
+	public void winDiagonallyReturnsTrueForTopRightToBottomLeftWin() {
 		move.row = 0;
 		move.col = 2;
 		board.update("X", move);
+
 		move.row = 1;
 		move.col = 1;
 		board.update("X", move);
+
 		move.row = 2;
 		move.col = 0;
 		board.update("X", move);
-		System.out.println(board.toString());
-		
+
 		assertTrue(board.isWinnerDiagonally("X"));
-		
 	}
-	
+
 	@Test
-	public void getAvailableMovesReturnsAllMovesForEmptyBoard(){
+	public void getAvailableMovesReturnsAllMovesForEmptyBoard() {
 		ArrayList<Move> moves = board.getAvailableMoves();
 		assertEquals(9, moves.size());
 	}
-	
+
 	@Test
-	public void getAvailableMovesLeavesOutMarkedSpaces(){
+	public void getAvailableMovesLeavesOutMarkedSpaces() {
 		move.row = 0;
 		move.col = 0;
 		game.takeTurn(player1, move);
-		
+
 		ArrayList<Move> moves = board.getAvailableMoves();
-		
+
 		assertEquals(8, moves.size());
 	}
-	
+
 	@Test
-	public void isDrawReturnsTrueWhenAllSpacesTakenAndNoWinner(){
+	public void isDrawReturnsTrueWhenAllSpacesTakenAndNoWinner() {
 		board = generateDrawState();
 		assertTrue(board.isDraw());
 	}
-	
+
 	@Test
-	public void isGameOverReturnsTrueWhenThereIsAWinnerOrDraw(){
+	public void isGameOverReturnsTrueWhenThereIsAWinnerOrDraw() {
 		board = generateDrawState();
 		assertTrue(board.isGameOver());
 	}
-	
+
 	@Test
-	public void isGameOverReturnsFalseWhenNoWinnerAndNoDraw(){
+	public void isGameOverReturnsFalseWhenNoWinnerAndNoDraw() {
 		assertEquals(false, board.isGameOver());
 	}
-	
+
 	@Test
-	public void getOtherPlayerReturnsOppositeOfPassedInPlayer(){
-		Player otherPlayer = game.getOtherPlayer(player1);
-		
-		assertEquals(player2, otherPlayer);
-		
-		otherPlayer = game.getOtherPlayer(player2);
-		
-		assertEquals(player1, otherPlayer);
-	}
-	
-	@Test
-	public void availableMovesIsEmptyInDrawState(){
+	public void availableMovesIsEmptyInDrawState() {
 		board = generateDrawState();
 		assertTrue(board.getAvailableMoves().isEmpty());
 	}
-	
-	public Board generateDrawState(){
+
+	public Board generateDrawState() {
 		Board board = new Board();
 		board.state[0][0] = "X";
 		board.state[0][1] = "X";
@@ -175,7 +164,7 @@ public class BoardTest {
 		board.state[1][0] = "O";
 		board.state[1][1] = "O";
 		board.state[2][1] = "O";
-		
+
 		return board;
 	}
 }
