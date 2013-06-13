@@ -1,12 +1,7 @@
 package test;
 
-import static org.junit.Assert.*;
-import org.hamcrest.Matcher;
-
-
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 
 import source.Board;
 import source.Player;
@@ -17,8 +12,8 @@ public class BoardTest {
 	
 	@Before
 	public void beforeAll(){
-		player1 = new Player();
-		player2 = new Player();
+		player1 = new Player("X", "human");
+		player2 = new Player("O", "computer");
 		board 	= new Board(player1, player2);
 	}
 	
