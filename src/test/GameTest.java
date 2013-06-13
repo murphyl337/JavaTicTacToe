@@ -39,21 +39,4 @@ public class GameTest {
 		
 		assertEquals("X", game.getBoard().state[0][0]);
 	}
-	
-	@Test
-	public void getAvailableMovesReturnsAllMovesForEmptyBoard(){
-		ArrayList<Move> moves = game.getAvailableMoves();
-		assertEquals(9, moves.size());
-	}
-	
-	@Test
-	public void getAvailableMovesLeavesOutMarkedSpaces(){
-		move.row = 0;
-		move.col = 0;
-		game.takeTurn(player1, move);
-		
-		ArrayList<Move> moves = game.getAvailableMoves();
-		
-		assertEquals(8, moves.size());
-	}
 }

@@ -26,6 +26,20 @@ public class Board {
 		return sb.toString();
 	}
 	
+	public ArrayList<Move> getAvailableMoves() {
+		Move move = new Move(0,0);
+		ArrayList<Move> availableMoves = new ArrayList<Move>();
+		for(int row=0; row<3; row++){
+			for(int col=0; col<3; col++){
+				move.row = row;
+				move.col = col;
+				if(state[row][col].equals(""))
+					availableMoves.add(move);
+			}
+		}
+		return availableMoves;
+	}
+	
 	public boolean isWinner(String marker) {
 		return isWinnerHorizontally(marker) || 
 				isWinnerVertically(marker) || 

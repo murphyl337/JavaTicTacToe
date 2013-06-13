@@ -1,6 +1,9 @@
 package test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -29,8 +32,8 @@ public class BoardTest {
 	public void boardIsEmptyWhenInstantiated() {
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				assert (board.state[row][col].equals(""));
-				assert (!board.state[row][col].equals(null));
+				assertEquals ("", board.state[row][col]);
+				assertNotNull(board.state[row][col]);
 			}
 		}
 	}
@@ -73,5 +76,22 @@ public class BoardTest {
 		}
 
 		assertEquals(true, board.isWinnerDiagonally("X"));
+	}
+	
+	@Test
+	public void getAvailableMovesReturnsAllMovesForEmptyBoard(){
+		ArrayList<Move> moves = board.getAvailableMoves();
+		assertEquals(9, moves.size());
+	}
+	
+	@Test
+	public void getAvailableMovesLeavesOutMarkedSpaces(){
+		move.row = 0;
+		move.col = 0;
+		game.takeTurn(player1, move);
+		
+		ArrayList<Move> moves = board.getAvailableMoves();
+		
+		assertEquals(8, moves.size());
 	}
 }
