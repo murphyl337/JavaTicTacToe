@@ -24,8 +24,11 @@ public class BoardTest {
 	
 	@Test
 	public void boardIsEmptyWhenInstantiated() {
-		for(int space=0; space<3; space++){
-			assert(board.state[space].equals(""));
+		for(int row=0; row<3; row++){
+			for(int col=0; col<3; col++){
+				assert(board.state[row][col].equals(""));
+				assert(!board.state[row][col].equals(null));
+			}
 		}
 	}
 	
@@ -34,5 +37,10 @@ public class BoardTest {
 		assert(board.players.size() == 2);
 	}
 
-	
+	@Test
+	public void printsBoardNiceley(){
+		String boardView = board.print();
+		String expected = "[][][]\n[][][]\n[][][]";
+		assert(boardView.equals(expected));
+	}
 }
