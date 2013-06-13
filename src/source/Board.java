@@ -86,9 +86,15 @@ public class Board {
 	public boolean isDraw() {
 		boolean draw = false;
 		if(getAvailableMoves().isEmpty() &&
-				!isWinner("X") || !isWinner("O"))
+				!isWinner("X") && !isWinner("O"))
 			draw = true;
 		return draw;
+	}
+
+	public boolean isGameOver() {
+		boolean over = false;
+		if(isWinner("X") || isWinner("O") || isDraw()) over = true;
+		return over;
 	}
 
 }

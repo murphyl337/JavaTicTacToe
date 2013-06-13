@@ -101,6 +101,18 @@ public class BoardTest {
 		assertTrue(board.isDraw());
 	}
 	
+	@Test
+	public void isGameOverReturnsTrueWhenThereIsAWinnerOrDraw(){
+		board = generateDrawState();
+		assertTrue(board.isGameOver());
+	}
+	
+	@Test
+	public void isGameOverReturnsFalseWhenNoWinnerAndNoDraw(){
+		System.out.println(board.toString());
+		assertEquals(false, board.isGameOver());
+	}
+	
 	public Board generateDrawState(){
 		Board board = new Board();
 		board.state[0][0] = "X";
