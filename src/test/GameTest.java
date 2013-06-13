@@ -1,6 +1,9 @@
 package test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,5 +39,22 @@ public class GameTest {
 		game.takeTurn(player1, move);
 		
 		assertEquals("X", game.getBoard().state[0][0]);
+	}
+	
+	@Test
+	public void getAvailableMovesReturnsAllMovesForEmptyBoard(){
+		ArrayList<Game.Move> moves = game.getAvailableMoves();
+		assertEquals(9, moves.size());
+	}
+	
+	@Test
+	public void getAvailableMovesLeavesOutMarkedSpaces(){
+		move.row = 0;
+		move.col = 0;
+		game.takeTurn(player1, move);
+		
+		ArrayList<Game.Move> moves = game.getAvailableMoves();
+		
+		assertEquals(8, moves.size());
 	}
 }

@@ -2,6 +2,8 @@ package source;
 
 import java.util.ArrayList;
 
+import source.Game.Move;
+
 
 public class Board {
 	public String [][] state = new String[3][3];
