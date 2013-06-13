@@ -2,21 +2,11 @@ package source;
 
 import java.util.ArrayList;
 
-import source.Game.Move;
+import source.Move;
 
 public class Game {
 	private Board board;
 	private Player player1, player2;
-	
-	public class Move{
-		public int row;
-		public int col;
-		
-		public Move(int row, int col){
-			this.row = row;
-			this.col = col;
-		}
-	}
 
 	public Game(Board board, Player player1, Player player2) {
 		this.board = board;

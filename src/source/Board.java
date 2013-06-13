@@ -2,7 +2,7 @@ package source;
 
 import java.util.ArrayList;
 
-import source.Game.Move;
+import source.Move;
 
 
 public class Board {

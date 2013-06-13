@@ -10,13 +10,14 @@ import org.junit.Test;
 
 import source.Board;
 import source.Game;
+import source.Move;
 import source.Player;
 
 public class GameTest {
 	Player player1, player2;
 	Board board;
 	Game game;
-	Game.Move move;
+	Move move;
 
 	@Before
 	public void before(){
@@ -24,7 +25,7 @@ public class GameTest {
 		player2 = new Player("O", "computer");
 		board = new Board();
 		game = new Game(board, player1, player2);
-		move = game.new Move(0,0);
+		move = new Move(0,0);
 	}
 	
 	@Test
@@ -34,8 +35,6 @@ public class GameTest {
 	
 	@Test
 	public void gameBoardUpdatesWhenTurnIsTaken(){
-		move = game.new Move(0,0);
-		
 		game.takeTurn(player1, move);
 		
 		assertEquals("X", game.getBoard().state[0][0]);
@@ -43,7 +42,7 @@ public class GameTest {
 	
 	@Test
 	public void getAvailableMovesReturnsAllMovesForEmptyBoard(){
-		ArrayList<Game.Move> moves = game.getAvailableMoves();
+		ArrayList<Move> moves = game.getAvailableMoves();
 		assertEquals(9, moves.size());
 	}
 	
@@ -53,7 +52,7 @@ public class GameTest {
 		move.col = 0;
 		game.takeTurn(player1, move);
 		
-		ArrayList<Game.Move> moves = game.getAvailableMoves();
+		ArrayList<Move> moves = game.getAvailableMoves();
 		
 		assertEquals(8, moves.size());
 	}
