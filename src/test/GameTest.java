@@ -39,4 +39,13 @@ public class GameTest {
 		
 		assertEquals("X", game.getBoard().state[0][0]);
 	}
+	
+	@Test
+	public void defaultBestScoreIsIntMaxForP1IntMinForP2(){
+		int bestScore = game.getDefaultBestScore(player1);
+		assertEquals(Integer.MIN_VALUE, bestScore);
+		
+		bestScore = game.getDefaultBestScore(player2);
+		assertEquals(Integer.MAX_VALUE, bestScore);
+	}
 }
