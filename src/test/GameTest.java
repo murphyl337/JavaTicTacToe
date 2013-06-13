@@ -1,12 +1,11 @@
 package test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-
-import java.util.ArrayList;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import source.Board;
@@ -66,4 +65,30 @@ public class GameTest {
 		assertTrue(game.isBestScore(score, bestScore, player2));
 	} 
 	
+	@Test
+	public void getBestMoveReturnsCenterSpaceWhenCornerIsTaken(){
+		game.takeTurn(player1, move);
+		
+		move = game.getBestMove(game.getBoard(), player2);
+
+		assertEquals(1, move.row);
+		assertEquals(1, move.col);
+	}
+	
+	@Test
+	public void getBestMoveIsWinningMove(){
+		board.update("X", move);
+		move = new Move(0,1);
+		board.update("X", move);
+		move = new Move(1,0);
+		board.update("X", move);
+		move = new Move(1,1);
+		board.update("O", move);
+		move = new Move(2,0);
+		board.update("O", move);
+		
+		move = game.getBestMove(board, player2);
+		assertEquals(0, move.row);
+		assertEquals(2, move.col);
+	}
 }
