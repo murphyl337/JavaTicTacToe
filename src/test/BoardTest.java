@@ -39,8 +39,8 @@ public class BoardTest {
 	}
 
 	@Test
-	public void printsBoardNicely() {
-		String boardView = board.print();
+	public void toStringReturnsNicelyFormattedBoard() {
+		String boardView = board.toString();
 		String expected = "[][][]\n[][][]\n[][][]";
 		assert (boardView.equals(expected));
 	}
@@ -93,5 +93,26 @@ public class BoardTest {
 		ArrayList<Move> moves = board.getAvailableMoves();
 		
 		assertEquals(8, moves.size());
+	}
+	
+	@Test
+	public void isDrawReturnsTrueWhenAllSpacesTakenAndNoWinner(){
+		board = generateDrawState();
+		assertTrue(board.isDraw());
+	}
+	
+	public Board generateDrawState(){
+		Board board = new Board();
+		board.state[0][0] = "X";
+		board.state[0][1] = "X";
+		board.state[1][2] = "X";
+		board.state[2][0] = "X";
+		board.state[2][2] = "X";
+		board.state[0][2] = "O";
+		board.state[1][0] = "O";
+		board.state[1][1] = "O";
+		board.state[2][1] = "O";
+		
+		return board;
 	}
 }

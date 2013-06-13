@@ -15,7 +15,7 @@ public class Board {
 		}
 	}
 
-	public String print() {
+	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for( int row=0; row<3; row++ ){
 			for(int col=0; col<3; col++){
@@ -81,6 +81,14 @@ public class Board {
 			winner = true;
 		
 		return winner;
+	}
+
+	public boolean isDraw() {
+		boolean draw = false;
+		if(getAvailableMoves().isEmpty() &&
+				!isWinner("X") || !isWinner("O"))
+			draw = true;
+		return draw;
 	}
 
 }
