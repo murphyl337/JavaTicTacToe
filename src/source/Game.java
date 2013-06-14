@@ -1,8 +1,6 @@
 package source;
 
-import java.util.ArrayList;
-
-import source.Move;
+import java.util.Scanner;
 
 public class Game {
 	private Board board;
@@ -31,6 +29,12 @@ public class Game {
 		setCurrentPlayer(getOtherPlayer(getCurrentPlayer()));
 	}
 	
+	public void printState() {
+		if(board.isWinner("X")) System.out.println("X IS WINNER!");
+		if(board.isWinner("O")) System.out.println("O IS WINNER!");
+		if(board.isDraw()) System.out.println("IT'S A DRAW");
+	}
+	
 	public Board getBoard() {
 		return board;
 	}
@@ -57,5 +61,7 @@ public class Game {
 
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
-	}	
+	}
+
+		
 }

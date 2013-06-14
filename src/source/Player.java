@@ -8,6 +8,14 @@ public class Player {
 		this.setMarker(marker);
 		this.setType(type);
 	}
+	
+	public boolean isHuman(){
+		return this.type.equals("human");
+	}
+	
+	public boolean isComputer(){
+		return this.type.equals("computer");
+	}
 
 	public String getMarker() {
 		return marker;

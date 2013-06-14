@@ -8,4 +8,9 @@ public class Move{
 		this.row = row;
 		this.col = col;
 	}
+	
+	public Move(String row, String col){
+		this.row = Integer.parseInt(row);
+		this.col = Integer.parseInt(col);
+	}
 }
