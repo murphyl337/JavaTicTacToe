@@ -1,22 +1,23 @@
 package source;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ConsoleHelper {
 
-	public String greetUser() {
+	public void greetUser() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("Welcome to Tic Tac Toe!\n");
 		sb.append("What configuration of players would you like to play with?\n");
 		sb.append("H: Human | C: Computer\n");
 		sb.append("HvH, CvC, HvC, or CvH?  (case does not matter)");
-		return sb.toString();
+		System.out.println(sb.toString());
 	}
 
 	public boolean isValidPlayerConfig(String playerConfig) {
 		boolean valid = false;
-		if (playerConfig.equals("hvh") || playerConfig.equals("hvc")
-				|| playerConfig.equals("cvh") || playerConfig.equals("cvc"))
+		if (playerConfig.equalsIgnoreCase("hvh") || playerConfig.equalsIgnoreCase("hvc")
+				|| playerConfig.equalsIgnoreCase("cvh") || playerConfig.equalsIgnoreCase("cvc"))
 			valid = true;
 		return valid;
 	}
@@ -69,4 +70,29 @@ public class ConsoleHelper {
 		return players;
 	}
 
+	public boolean isValidMoveInput(String moveString) {
+		return moveString.matches("[0-2],[0-2]"); 
+	}
+	
+	public Game setUpGame(){
+		greetUser();
+		Scanner scanner = new Scanner(System.in);
+		String playerConfig = "";
+		boolean validPlayerConfig = false;
+		
+		while(!validPlayerConfig){
+			String config = scanner.nextLine();
+			if(!isValidPlayerConfig(config)){
+				System.out.println("Incorrect configuration. (hvh, hvc, cvh, cvc)");
+				continue;
+			}
+			validPlayerConfig = true;
+			playerConfig = config;
+		}
+		
+		ArrayList<Player> players = createPlayers(playerConfig);
+		Board board = new Board();
+		Game game = new Game(board, players.get(0), players.get(1));
+		return game;
+	}
 }

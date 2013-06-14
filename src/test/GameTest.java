@@ -39,4 +39,21 @@ public class GameTest {
 		
 		assertEquals("X", game.getBoard().state[0][0]);
 	}
+	
+	@Test
+	public void getOtherPlayerReturnsOppositeOfPassedInPlayer() {
+		Player otherPlayer = game.getOtherPlayer(player1);
+
+		assertEquals(player2, otherPlayer);
+
+		otherPlayer = game.getOtherPlayer(player2);
+
+		assertEquals(player1, otherPlayer);
+	}
+	
+	@Test
+	public void nextTurnChangesCurrentPlayer(){
+		game.nextTurn();
+		assertEquals(player2, game.getCurrentPlayer());
+	}
 }

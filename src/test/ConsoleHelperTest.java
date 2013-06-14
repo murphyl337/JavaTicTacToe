@@ -1,5 +1,6 @@
 package test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -53,7 +54,17 @@ public class ConsoleHelperTest {
 	
 	@Test
 	public void validatesPlayerConfigInput(){
-		ArrayList<Player> players = null;
-		consoleHelper.isValidPlayerConfig("pvp");
+		assertTrue(consoleHelper.isValidPlayerConfig("hvh"));
+		assertTrue(consoleHelper.isValidPlayerConfig("hVc"));
+		assertTrue(consoleHelper.isValidPlayerConfig("Cvh"));
+		assertTrue(consoleHelper.isValidPlayerConfig("cvc"));
+		assertFalse(consoleHelper.isValidPlayerConfig("hvv"));
+	}
+	
+	@Test
+	public void validatesMoveInput(){
+		assertTrue(consoleHelper.isValidMoveInput("0,0"));
+		assertFalse(consoleHelper.isValidMoveInput("3,3"));
+		assertFalse(consoleHelper.isValidMoveInput("11"));
 	}
 }

@@ -8,12 +8,6 @@ public class AI {
 	public AI(Game game){
 		this.game = game;
 	}
-	
-	public Player getOtherPlayer(Player player) {
-		if (player == game.getPlayer1())
-			return game.getPlayer2();
-		return game.getPlayer1();
-	}
 
 	public int getDefaultBestScore(Player player) {
 		if (player == game.getPlayer1())
@@ -34,7 +28,7 @@ public class AI {
 	}
 	
 	public Move getBestMove(Board board, Player player) {
-		Player otherPlayer = getOtherPlayer(player);
+		Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
         Move bestMove = null;
         int bestScore = getDefaultBestScore(player);
@@ -57,7 +51,7 @@ public class AI {
         if(board.isWinner(game.getPlayer2().getMarker())) return -1;
         if(board.isDraw()) return 0;
 
-        Player otherPlayer = getOtherPlayer(player);
+        Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
         int bestScore = getDefaultBestScore(player);
 

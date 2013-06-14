@@ -29,17 +29,6 @@ public class AITest {
 		move = new Move(0,0);
 		
 	}
-	
-	@Test
-	public void getOtherPlayerReturnsOppositeOfPassedInPlayer() {
-		Player otherPlayer = ai.getOtherPlayer(player1);
-
-		assertEquals(player2, otherPlayer);
-
-		otherPlayer = ai.getOtherPlayer(player2);
-
-		assertEquals(player1, otherPlayer);
-	}
 
 	@Test
 	public void defaultBestScoreIsIntMaxForP1IntMinForP2(){
