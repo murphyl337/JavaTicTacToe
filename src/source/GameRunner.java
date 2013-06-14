@@ -3,6 +3,7 @@ package source;
 import java.util.Scanner;
 
 public class GameRunner {
+	public Game game;
 
 	/**
 	 * @param args
@@ -11,6 +12,12 @@ public class GameRunner {
 		
 	}
 	
+	public GameRunner(Game game){
+		this.game = game;
+	}
 	
+	public void playGame(){
+		
+	}
 
 }
