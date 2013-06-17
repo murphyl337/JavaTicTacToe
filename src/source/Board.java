@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import source.Move;
 
 public class Board {
-	public String[][] state = new String[3][3];
+	private String[][] state = new String[3][3];
 
 	public Board() {
 		for (int row = 0; row < 3; row++) {
@@ -23,6 +23,14 @@ public class Board {
 		return copy;
 	}
 
+	public String getSpace(int row, int col){
+		return state[row][col]; 
+	}
+	
+	public void setSpace(int row, int col, String marker){
+		state[row][col] = marker;
+	}
+		
 	public void update(String marker, Move move) {
 		state[move.row][move.col] = marker;
 	}

@@ -84,7 +84,6 @@ public class ConsoleHelper {
 	}
 
 	public void playGame(Game game) {
-		AI ai = new AI(game);
 		System.out.println("These are the moves you can make: ");
 		game.getBoard().printTemplateBoard();
 		while (game.active) {
@@ -99,9 +98,7 @@ public class ConsoleHelper {
 
 			}
 			if (game.getCurrentPlayer().isComputer()) {
-				game.takeTurn(game.getCurrentPlayer(), ai.getBestMove(
-						game.getBoard(), game.getCurrentPlayer()));
-				System.out.println(game.getBoard().toString());
+				makeComputerMove(game);
 			}
 			if (game.getBoard().isGameOver())
 				game.active = false;
@@ -109,5 +106,12 @@ public class ConsoleHelper {
 			game.nextTurn();
 		}
 		game.printState();
+	}
+
+	private void makeComputerMove(Game game) {
+		Player currentPlayer = game.getCurrentPlayer();
+		Board board = game.getBoard();
+		game.takeTurn(currentPlayer, game.getBestMove(board, currentPlayer));
+		System.out.println(board.toString());
 	}
 }

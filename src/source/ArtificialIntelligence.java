@@ -2,55 +2,36 @@ package source;
 
 import java.util.ArrayList;
 
-public class Game {
-	private Board board;
-	private Player player1, player2, currentPlayer;
-	public boolean active;
-
-	public Game(Board board, Player player1, Player player2) {
-		this.board = board;
-		this.setPlayer1(player1);
-		this.setPlayer2(player2);
-		this.setCurrentPlayer(player1);
-		active = true;
-	}
+public class ArtificialIntelligence {
+	public Game game;
 	
-	public Player getOtherPlayer(Player player) {
-		if (player == getPlayer1())
-			return getPlayer2();
-		return getPlayer1();
-	}
-
-	public void takeTurn(Player player, Move move) {
-		board.update(player.getMarker(), move);
-	}
-
-	public void nextTurn() {
-		setCurrentPlayer(getOtherPlayer(getCurrentPlayer()));
+	public ArtificialIntelligence(Game game){
+		this.game = game;
 	}
 	
 	public int getDefaultBestScore(Player player) {
-		if (player == getPlayer1())
+		if (player == game.getPlayer1())
 			return Integer.MIN_VALUE;
 		return Integer.MAX_VALUE;
 	}
 
 	public boolean isBestScore(int score, int bestScore, Player player) {
 		boolean isBestScore = false;
-		if (player == getPlayer1()) {
+		if (player == game.getPlayer1()) {
 			if (score > bestScore)
 				isBestScore = true;
-		} else if (player == getPlayer2()) {
+		} else if (player == game.getPlayer2()) {
 			if (score < bestScore)
 				isBestScore = true;
 		}
 		return isBestScore;
 	}
 
+
 	public Move getBestMove(Board board, Player player) {
 		Move bestMove = null;
 		
-		Player otherPlayer = getOtherPlayer(player);
+		Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
         int bestScore = getDefaultBestScore(player);
 
@@ -68,11 +49,11 @@ public class Game {
 	}
 	
 	public int minimax(Board board, Player player){
-        if(board.isWinner(getPlayer1().getMarker())) return 1;
-        if(board.isWinner(getPlayer2().getMarker())) return -1;
+        if(board.isWinner(game.getPlayer1().getMarker())) return 1;
+        if(board.isWinner(game.getPlayer2().getMarker())) return -1;
         if(board.isDraw()) return 0;
 
-        Player otherPlayer = getOtherPlayer(player);
+        Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
         int bestScore = getDefaultBestScore(player);
 
@@ -86,42 +67,4 @@ public class Game {
         }
         return bestScore;
     }
-
-	public void printState() {
-		if (board.isWinner("X"))
-			System.out.println("X IS WINNER!");
-		if (board.isWinner("O"))
-			System.out.println("O IS WINNER!");
-		if (board.isDraw())
-			System.out.println("IT'S A DRAW");
-	}
-
-	public Board getBoard() {
-		return board;
-	}
-
-	public Player getPlayer1() {
-		return player1;
-	}
-
-	public void setPlayer1(Player player1) {
-		this.player1 = player1;
-	}
-
-	public Player getPlayer2() {
-		return player2;
-	}
-
-	public void setPlayer2(Player player2) {
-		this.player2 = player2;
-	}
-
-	public Player getCurrentPlayer() {
-		return currentPlayer;
-	}
-
-	public void setCurrentPlayer(Player currentPlayer) {
-		this.currentPlayer = currentPlayer;
-	}
-
 }

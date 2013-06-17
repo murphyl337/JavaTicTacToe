@@ -34,8 +34,8 @@ public class BoardTest {
 	public void boardIsEmptyWhenInstantiated() {
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				assertEquals("", board.state[row][col]);
-				assertNotNull(board.state[row][col]);
+				assertEquals("", board.getSpace(row, col));
+				assertNotNull(board.getSpace(row, col));
 			}
 		}
 	}
@@ -61,8 +61,8 @@ public class BoardTest {
 		Board clone = board.copy();
 		clone.update("X", move);
 
-		assertEquals("", board.state[0][0]);
-		assertEquals("X", clone.state[0][0]);
+		assertEquals("", board.getSpace(0, 0));
+		assertEquals("X", clone.getSpace(0, 0));
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class BoardTest {
 		for (int col = 0; col < 3; col++) {
 			move.row = 0;
 			move.col = col;
-			board.state[move.row][move.col] = "X";
+			board.setSpace(move.row, move.col, "X");
 		}
 
 		assertEquals(true, board.isWinnerHorizontally("X"));
@@ -79,9 +79,7 @@ public class BoardTest {
 	@Test
 	public void winVerticallyReturnsTrueForWinnerByColumn() {
 		for (int row = 0; row < 3; row++) {
-			move.row = row;
-			move.col = 0;
-			board.state[move.row][move.col] = "X";
+			board.setSpace(row, 0, "X");
 		}
 
 		assertEquals(true, board.isWinnerVertically("X"));
@@ -92,7 +90,7 @@ public class BoardTest {
 		for (int space = 0; space < 3; space++) {
 			move.row = space;
 			move.col = space;
-			board.state[move.row][move.col] = "X";
+			board.setSpace(space, space, "X");
 		}
 
 		assertEquals(true, board.isWinnerDiagonally("X"));
@@ -157,15 +155,16 @@ public class BoardTest {
 
 	public Board generateDrawState() {
 		Board board = new Board();
-		board.state[0][0] = "X";
-		board.state[0][1] = "X";
-		board.state[1][2] = "X";
-		board.state[2][0] = "X";
-		board.state[2][2] = "X";
-		board.state[0][2] = "O";
-		board.state[1][0] = "O";
-		board.state[1][1] = "O";
-		board.state[2][1] = "O";
+
+		board.setSpace(0, 0, "X");
+		board.setSpace(0, 1, "X");
+		board.setSpace(1, 2, "X");
+		board.setSpace(2, 0, "X");
+		board.setSpace(2, 2, "X");
+		board.setSpace(0, 2, "O");
+		board.setSpace(1, 0, "O");
+		board.setSpace(1, 1, "O");
+		board.setSpace(2, 1, "O");
 
 		return board;
 	}

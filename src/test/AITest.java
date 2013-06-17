@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.AI;
+import source.ArtificialIntelligence;
 import source.Board;
 import source.Game;
 import source.Move;
@@ -16,7 +16,7 @@ public class AITest {
 	Player player1, player2;
 	Board board;
 	Game game;
-	AI ai;
+	ArtificialIntelligence ai;
 	Move move;
 	
 	@Before
@@ -25,7 +25,7 @@ public class AITest {
 		player2 = new Player("O", "human");
 		board = new Board();
 		game = new Game(board, player1, player2);
-		ai = new AI(game);
+		ai = new ArtificialIntelligence(game);
 		move = new Move(0,0);
 		
 	}

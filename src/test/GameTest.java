@@ -35,7 +35,7 @@ public class GameTest {
 	public void gameBoardUpdatesWhenTurnIsTaken(){
 		game.takeTurn(player1, move);
 		
-		assertEquals("X", game.getBoard().state[0][0]);
+		assertEquals("X", game.getBoard().getSpace(0, 0));
 	}
 	
 	@Test
