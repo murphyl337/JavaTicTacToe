@@ -2,9 +2,13 @@ package source;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.StringTokenizer;
 
 public class ConsoleHelper {
+	PlayerConfigFactory configFactory;
+	
+	public ConsoleHelper(){
+		configFactory = new PlayerConfigFactory();
+	}
 
 	public void greetUser() {
 		StringBuilder sb = new StringBuilder();
@@ -26,55 +30,34 @@ public class ConsoleHelper {
 	}
 
 	public ArrayList<Player> createPlayers(String playerConfig) {
-		if (playerConfig.equalsIgnoreCase("hvh"))
-			return createHVHConfig();
-		if (playerConfig.equalsIgnoreCase("hvc"))
-			return createHVCConfig();
-		if (playerConfig.equalsIgnoreCase("cvh"))
-			return createCVHConfig();
-		if (playerConfig.equalsIgnoreCase("cvc"))
-			return createCVCConfig();
-		return null;
-	}
-
-	public ArrayList<Player> createHVHConfig() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player player1 = new Player("X", "human");
-		Player player2 = new Player("O", "human");
-		players.add(player1);
-		players.add(player2);
+		ArrayList<Player> players = configFactory.createConfiguration(playerConfig);
 		return players;
 	}
 
-	public ArrayList<Player> createHVCConfig() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player player1 = new Player("X", "human");
-		Player player2 = new Player("O", "computer");
-		players.add(player1);
-		players.add(player2);
-		return players;
-	}
-
-	public ArrayList<Player> createCVHConfig() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player player1 = new Player("X", "computer");
-		Player player2 = new Player("O", "human");
-		players.add(player1);
-		players.add(player2);
-		return players;
-	}
-
-	public ArrayList<Player> createCVCConfig() {
-		ArrayList<Player> players = new ArrayList<Player>();
-		Player player1 = new Player("X", "computer");
-		Player player2 = new Player("O", "computer");
-		players.add(player1);
-		players.add(player2);
-		return players;
-	}
 
 	public boolean isValidMoveInput(String moveString) {
 		return moveString.matches("[0-2],[0-2]");
+	}
+	
+	public Move getMoveInput() {
+		System.out.println("What move would you like to take? (row,col)");
+		Scanner scanner = new Scanner(System.in);
+		String moveInput = "";
+		boolean validMoveInput = false;
+
+		while (!validMoveInput) {
+			String move = scanner.nextLine();
+			if (!isValidMoveInput(move)) {
+				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
+				continue;
+			}
+			validMoveInput = true;
+			moveInput = move;
+		}
+
+		String[] moveArray = moveInput.split(",");
+		Move move = new Move(moveArray[0], moveArray[1]);
+		return move;
 	}
 
 	public Game setUpGame() {
@@ -126,26 +109,5 @@ public class ConsoleHelper {
 			game.nextTurn();
 		}
 		game.printState();
-	}
-
-	public Move getMoveInput() {
-		System.out.println("What move would you like to take? (row,col)");
-		Scanner scanner = new Scanner(System.in);
-		String moveInput = "";
-		boolean validMoveInput = false;
-
-		while (!validMoveInput) {
-			String move = scanner.nextLine();
-			if (!isValidMoveInput(move)) {
-				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
-				continue;
-			}
-			validMoveInput = true;
-			moveInput = move;
-		}
-
-		String[] moveArray = moveInput.split(",");
-		Move move = new Move(moveArray[0], moveArray[1]);
-		return move;
 	}
 }

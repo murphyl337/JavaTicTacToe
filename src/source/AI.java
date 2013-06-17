@@ -28,9 +28,10 @@ public class AI {
 	}
 	
 	public Move getBestMove(Board board, Player player) {
+		Move bestMove = null;
+		
 		Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
-        Move bestMove = null;
         int bestScore = getDefaultBestScore(player);
 
         for(int space = 0; space < availableMoves.size(); space++){
@@ -51,7 +52,11 @@ public class AI {
         if(board.isWinner(game.getPlayer2().getMarker())) return -1;
         if(board.isDraw()) return 0;
 
-        Player otherPlayer = game.getOtherPlayer(player);
+        return generateMoveTree(board, player);
+    }
+
+	private int generateMoveTree(Board board, Player player) {
+		Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
         int bestScore = getDefaultBestScore(player);
 
@@ -64,6 +69,6 @@ public class AI {
                 bestScore = score;
         }
         return bestScore;
-    };
+	};
 
 }

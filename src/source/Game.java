@@ -1,7 +1,5 @@
 package source;
 
-import java.util.Scanner;
-
 public class Game {
 	private Board board;
 	private Player player1, player2, currentPlayer;
@@ -20,21 +18,24 @@ public class Game {
 			return getPlayer2();
 		return getPlayer1();
 	}
-	
+
 	public void takeTurn(Player player, Move move) {
 		board.update(player.getMarker(), move);
 	}
-	
+
 	public void nextTurn() {
 		setCurrentPlayer(getOtherPlayer(getCurrentPlayer()));
 	}
-	
+
 	public void printState() {
-		if(board.isWinner("X")) System.out.println("X IS WINNER!");
-		if(board.isWinner("O")) System.out.println("O IS WINNER!");
-		if(board.isDraw()) System.out.println("IT'S A DRAW");
+		if (board.isWinner("X"))
+			System.out.println("X IS WINNER!");
+		if (board.isWinner("O"))
+			System.out.println("O IS WINNER!");
+		if (board.isDraw())
+			System.out.println("IT'S A DRAW");
 	}
-	
+
 	public Board getBoard() {
 		return board;
 	}
@@ -63,5 +64,4 @@ public class Game {
 		this.currentPlayer = currentPlayer;
 	}
 
-		
 }
