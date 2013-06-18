@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 public class ArtificialIntelligence {
 	private Game game;
-	
-	public ArtificialIntelligence(Game game){
+
+	public ArtificialIntelligence(Game game) {
 		this.game = game;
 	}
-	
+
 	public int getDefaultBestScore(Player player) {
 		if (player == game.getPlayer1())
 			return Integer.MIN_VALUE;
@@ -27,48 +27,50 @@ public class ArtificialIntelligence {
 		return isBestScore;
 	}
 
-
 	public Move getBestMove(Board board, Player player) {
 		Move bestMove = null;
-		
+
 		Player otherPlayer = game.getOtherPlayer(player);
-        ArrayList<Move> availableMoves = board.getAvailableMoves();
-        int bestScore = getDefaultBestScore(player);
+		ArrayList<Move> availableMoves = board.getAvailableMoves();
+		int bestScore = getDefaultBestScore(player);
 
-        for(int space = 0; space < availableMoves.size(); space++){
-            Board boardClone = board.copy();
-            GameRules rulesCopy = new GameRules(boardClone);
-            boardClone.update(player.getMarker(), availableMoves.get(space));
-            int currentScore = minimax(rulesCopy, boardClone, otherPlayer);
-            boolean isBestScore = isBestScore(currentScore, bestScore, player);
-            if(isBestScore){
-                bestScore = currentScore;
-                bestMove = availableMoves.get(space);
-            }
-        }
-        return bestMove;
+		for (int space = 0; space < availableMoves.size(); space++) {
+			Board boardClone = board.copy();
+			GameRules rulesCopy = new GameRules(boardClone);
+			boardClone.setSpace(availableMoves.get(space), player.getMarker());
+			int currentScore = minimax(rulesCopy, boardClone, otherPlayer);
+			boolean isBestScore = isBestScore(currentScore, bestScore, player);
+			if (isBestScore) {
+				bestScore = currentScore;
+				bestMove = availableMoves.get(space);
+			}
+		}
+		return bestMove;
 	}
-	
-	public int minimax(GameRules rules, Board board, Player player){
-        if(rules.isWinner(getGame().getPlayer1().getMarker())) return 1;
-        if(rules.isWinner(getGame().getPlayer2().getMarker())) return -1;
-        if(rules.isDraw()) return 0;
 
-        Player otherPlayer = game.getOtherPlayer(player);
-        ArrayList<Move> availableMoves = board.getAvailableMoves();
-        int bestScore = getDefaultBestScore(player);
+	public int minimax(GameRules rules, Board board, Player player) {
+		if (rules.isWinner(getGame().getPlayer1().getMarker()))
+			return 1;
+		if (rules.isWinner(getGame().getPlayer2().getMarker()))
+			return -1;
+		if (rules.isDraw())
+			return 0;
 
-        for(int space = 0; space < availableMoves.size(); space++){
-            Board boardClone = board.copy();
-            GameRules rulesCopy= new GameRules(boardClone);
-            boardClone.update(player.getMarker(), availableMoves.get(space));
-            int score = minimax(rulesCopy, boardClone, otherPlayer);
-            boolean isBestScore = isBestScore(score, bestScore, player);
-            if(isBestScore)
-                bestScore = score;
-        }
-        return bestScore;
-    }
+		Player otherPlayer = game.getOtherPlayer(player);
+		ArrayList<Move> availableMoves = board.getAvailableMoves();
+		int bestScore = getDefaultBestScore(player);
+
+		for (int space = 0; space < availableMoves.size(); space++) {
+			Board boardClone = board.copy();
+			GameRules rulesCopy = new GameRules(boardClone);
+			boardClone.setSpace(availableMoves.get(space), player.getMarker());
+			int score = minimax(rulesCopy, boardClone, otherPlayer);
+			boolean isBestScore = isBestScore(score, bestScore, player);
+			if (isBestScore)
+				bestScore = score;
+		}
+		return bestScore;
+	}
 
 	public Game getGame() {
 		return game;

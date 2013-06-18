@@ -72,15 +72,15 @@ public class GameRulesTest {
 	public void winDiagonallyReturnsTrueForTopRightToBottomLeftWin() {
 		move.row = 0;
 		move.col = 2;
-		board.update("X", move);
+		board.setSpace(move, "X");
 
 		move.row = 1;
 		move.col = 1;
-		board.update("X", move);
+		board.setSpace(move, "X");
 
 		move.row = 2;
 		move.col = 0;
-		board.update("X", move);
+		board.setSpace(move, "X");
 
 		assertTrue(rules.isWinnerDiagonally("X"));
 	}

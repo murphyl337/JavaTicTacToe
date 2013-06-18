@@ -1,12 +1,10 @@
 package source;
 
-import java.util.ArrayList;
-
 public class Game {
 	private GameRules rules;
 	private Board board;
 	private ArtificialIntelligence ai;
-	
+
 	private Player player1, player2, currentPlayer;
 
 	public Game(GameRules rules, Board board, Player player1, Player player2) {
@@ -17,7 +15,7 @@ public class Game {
 		this.player2 = player2;
 		this.currentPlayer = player1;
 	}
-	
+
 	public Player getOtherPlayer(Player player) {
 		if (player == getPlayer1())
 			return getPlayer2();
@@ -25,7 +23,7 @@ public class Game {
 	}
 
 	public void takeTurn(Player player, Move move) {
-		board.update(player.getMarker(), move);
+		board.setSpace(move, player.getMarker());
 	}
 
 	public void nextTurn() {
@@ -38,11 +36,11 @@ public class Game {
 		takeTurn(currentPlayer, ai.getBestMove(board, currentPlayer));
 		System.out.println(board.toString());
 	}
-	
+
 	public void playGame() {
 		ConsoleHelper helper = new ConsoleHelper();
 		System.out.println("These are the moves you can make: ");
-		getBoard().printTemplateBoard();
+		helper.printTemplateBoard();
 		while (!getRules().isGameOver()) {
 			if (getCurrentPlayer().isHuman()) {
 				Move move = helper.getMoveInput();
@@ -52,8 +50,7 @@ public class Game {
 				}
 				takeTurn(getCurrentPlayer(), move);
 				System.out.println(getBoard().toString());
-			}
-			else{
+			} else {
 				makeComputerMove();
 			}
 			nextTurn();

@@ -69,15 +69,15 @@ public class AITest {
 	
 	@Test
 	public void getBestMoveIsWinningMove(){
-		board.update("X", move);
+		board.setSpace(move, "X");
 		move = new Move(0,1);
-		board.update("X", move);
+		board.setSpace(move, "X");
 		move = new Move(1,0);
-		board.update("X", move);
+		board.setSpace(move, "X");
 		move = new Move(1,1);
-		board.update("O", move);
+		board.setSpace(move, "O");
 		move = new Move(2,0);
-		board.update("O", move);
+		board.setSpace(move, "O");
 		
 		move = ai.getBestMove(board, player2);
 		assertEquals(0, move.row);

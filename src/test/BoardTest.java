@@ -52,13 +52,11 @@ public class BoardTest {
 	@Test
 	public void copyConstructedBoardDoesNotUpdateOriginalBoard() {
 		Board clone = board.copy();
-		clone.update("X", move);
+		clone.setSpace(move, "X");
 
 		assertEquals("", board.getSpace(0, 0));
 		assertEquals("X", clone.getSpace(0, 0));
 	}
-
-	
 
 	@Test
 	public void getAvailableMovesReturnsAllMovesForEmptyBoard() {
