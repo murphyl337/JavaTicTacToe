@@ -3,14 +3,14 @@ package source;
 public class Game {
 	private GameRules rules;
 	private Board board;
-	private ArtificialIntelligence ai;
+	private ArtificialIntelligence artificialIntelligence;
 
 	private Player player1, player2, currentPlayer;
 
 	public Game(GameRules rules, Board board, Player player1, Player player2) {
 		this.board = board;
 		this.rules = rules;
-		this.ai = new ArtificialIntelligence(this);
+		this.artificialIntelligence = new ArtificialIntelligence(this);
 		this.player1 = player1;
 		this.player2 = player2;
 		this.currentPlayer = player1;
@@ -33,7 +33,7 @@ public class Game {
 	private void makeComputerMove() {
 		Player currentPlayer = getCurrentPlayer();
 		Board board = getBoard();
-		takeTurn(currentPlayer, ai.getBestMove(board, currentPlayer));
+		takeTurn(currentPlayer, artificialIntelligence.getBestMove(board, currentPlayer));
 		System.out.println(board.toString());
 	}
 
@@ -103,12 +103,12 @@ public class Game {
 		this.rules = rules;
 	}
 
-	public ArtificialIntelligence getAi() {
-		return ai;
+	public ArtificialIntelligence getArtificialIntelligence() {
+		return artificialIntelligence;
 	}
 
-	public void setAi(ArtificialIntelligence ai) {
-		this.ai = ai;
+	public void setArtificialIntelligence(ArtificialIntelligence ai) {
+		this.artificialIntelligence = ai;
 	}
 
 }
