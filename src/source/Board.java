@@ -113,24 +113,12 @@ public class Board {
 	}
 
 	public boolean isDraw() {
-		boolean draw = false;
-		if (getAvailableMoves().isEmpty() && !isWinner("X") && !isWinner("O"))
-			draw = true;
-		return draw;
+		return (getAvailableMoves().isEmpty() && !isWinner("X") && !isWinner("O"));
 	}
 
 	public boolean isGameOver() {
-		boolean over = false;
-		if (isWinner("X") || isWinner("O") || isDraw())
-			over = true;
-		return over;
-	}
+		return (isWinner("X") || isWinner("O") || isDraw());
 
-	public boolean isValidMove(Move move) {
-		boolean valid = false;
-		if (state[move.row][move.col].equals(""))
-			valid = true;
-		return valid;
 	}
 
 }

@@ -3,12 +3,14 @@ package source;
 import java.util.ArrayList;
 
 public class Game {
+	private GameRules rules;
 	private Board board;
 	private Player player1, player2, currentPlayer;
 	public boolean active;
 
 	public Game(Board board, Player player1, Player player2) {
 		this.board = board;
+		this.setRules(new GameRules(board));
 		this.setPlayer1(player1);
 		this.setPlayer2(player2);
 		this.setCurrentPlayer(player1);
@@ -122,6 +124,14 @@ public class Game {
 
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
+	}
+
+	public GameRules getRules() {
+		return rules;
+	}
+
+	public void setRules(GameRules rules) {
+		this.rules = rules;
 	}
 
 }

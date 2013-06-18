@@ -89,7 +89,7 @@ public class ConsoleHelper {
 		while (game.active) {
 			if (game.getCurrentPlayer().isHuman()) {
 				Move move = getMoveInput();
-				if (!game.getBoard().isValidMove(move)) {
+				if (!game.getRules().isValidMove(move)) {
 					System.out.println("Move taken");
 					continue;
 				}
