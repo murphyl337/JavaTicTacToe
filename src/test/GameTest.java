@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import source.Board;
 import source.Game;
+import source.GameRules;
 import source.Move;
 import source.Player;
 
@@ -16,13 +17,15 @@ public class GameTest {
 	Board board;
 	Game game;
 	Move move;
+	GameRules rules;
 
 	@Before
 	public void before(){
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "computer");
 		board = new Board();
-		game = new Game(board, player1, player2);
+		rules = new GameRules(board);
+		game = new Game(rules, board, player1, player2);
 		move = new Move(0,0);
 	}
 	

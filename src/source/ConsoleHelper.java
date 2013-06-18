@@ -5,8 +5,8 @@ import java.util.Scanner;
 
 public class ConsoleHelper {
 	PlayerConfigFactory configFactory;
-	
-	public ConsoleHelper(){
+
+	public ConsoleHelper() {
 		configFactory = new PlayerConfigFactory();
 	}
 
@@ -30,15 +30,15 @@ public class ConsoleHelper {
 	}
 
 	public ArrayList<Player> createPlayers(String playerConfig) {
-		ArrayList<Player> players = configFactory.createConfiguration(playerConfig);
+		ArrayList<Player> players = configFactory
+				.createConfiguration(playerConfig);
 		return players;
 	}
-
 
 	public boolean isValidMoveInput(String moveString) {
 		return moveString.matches("[0-2],[0-2]");
 	}
-	
+
 	public Move getMoveInput() {
 		System.out.println("What move would you like to take? (row,col)");
 		Scanner scanner = new Scanner(System.in);
@@ -60,9 +60,9 @@ public class ConsoleHelper {
 		return move;
 	}
 
-	public Game setUpGame() {
+	public Game setUpGame(Scanner scanner) {
 		greetUser();
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
 		String playerConfig = "";
 		boolean validPlayerConfig = false;
 
@@ -79,39 +79,8 @@ public class ConsoleHelper {
 
 		ArrayList<Player> players = createPlayers(playerConfig);
 		Board board = new Board();
-		Game game = new Game(board, players.get(0), players.get(1));
+		GameRules rules = new GameRules(board);
+		Game game = new Game(rules, board, players.get(0), players.get(1));
 		return game;
-	}
-
-	public void playGame(Game game) {
-		System.out.println("These are the moves you can make: ");
-		game.getBoard().printTemplateBoard();
-		while (game.active) {
-			if (game.getCurrentPlayer().isHuman()) {
-				Move move = getMoveInput();
-				if (!game.getRules().isValidMove(move)) {
-					System.out.println("Move taken");
-					continue;
-				}
-				game.takeTurn(game.getCurrentPlayer(), move);
-				System.out.println(game.getBoard().toString());
-
-			}
-			if (game.getCurrentPlayer().isComputer()) {
-				makeComputerMove(game);
-			}
-			if (game.getBoard().isGameOver())
-				game.active = false;
-
-			game.nextTurn();
-		}
-		game.printState();
-	}
-
-	private void makeComputerMove(Game game) {
-		Player currentPlayer = game.getCurrentPlayer();
-		Board board = game.getBoard();
-		game.takeTurn(currentPlayer, game.getBestMove(board, currentPlayer));
-		System.out.println(board.toString());
 	}
 }

@@ -5,16 +5,17 @@ import java.util.ArrayList;
 public class Game {
 	private GameRules rules;
 	private Board board;
+	private ArtificialIntelligence ai;
+	
 	private Player player1, player2, currentPlayer;
-	public boolean active;
 
-	public Game(Board board, Player player1, Player player2) {
+	public Game(GameRules rules, Board board, Player player1, Player player2) {
 		this.board = board;
-		this.setRules(new GameRules(board));
-		this.setPlayer1(player1);
-		this.setPlayer2(player2);
-		this.setCurrentPlayer(player1);
-		active = true;
+		this.rules = rules;
+		this.ai = new ArtificialIntelligence(this);
+		this.player1 = player1;
+		this.player2 = player2;
+		this.currentPlayer = player1;
 	}
 	
 	public Player getOtherPlayer(Player player) {
@@ -30,71 +31,42 @@ public class Game {
 	public void nextTurn() {
 		setCurrentPlayer(getOtherPlayer(getCurrentPlayer()));
 	}
-	
-	public int getDefaultBestScore(Player player) {
-		if (player == getPlayer1())
-			return Integer.MIN_VALUE;
-		return Integer.MAX_VALUE;
-	}
 
-	public boolean isBestScore(int score, int bestScore, Player player) {
-		boolean isBestScore = false;
-		if (player == getPlayer1()) {
-			if (score > bestScore)
-				isBestScore = true;
-		} else if (player == getPlayer2()) {
-			if (score < bestScore)
-				isBestScore = true;
+	private void makeComputerMove() {
+		Player currentPlayer = getCurrentPlayer();
+		Board board = getBoard();
+		takeTurn(currentPlayer, ai.getBestMove(board, currentPlayer));
+		System.out.println(board.toString());
+	}
+	
+	public void playGame() {
+		ConsoleHelper helper = new ConsoleHelper();
+		System.out.println("These are the moves you can make: ");
+		getBoard().printTemplateBoard();
+		while (!getRules().isGameOver()) {
+			if (getCurrentPlayer().isHuman()) {
+				Move move = helper.getMoveInput();
+				if (!getRules().isValidMove(move)) {
+					System.out.println("Move taken");
+					continue;
+				}
+				takeTurn(getCurrentPlayer(), move);
+				System.out.println(getBoard().toString());
+			}
+			else{
+				makeComputerMove();
+			}
+			nextTurn();
 		}
-		return isBestScore;
+		printState();
 	}
-
-	public Move getBestMove(Board board, Player player) {
-		Move bestMove = null;
-		
-		Player otherPlayer = getOtherPlayer(player);
-        ArrayList<Move> availableMoves = board.getAvailableMoves();
-        int bestScore = getDefaultBestScore(player);
-
-        for(int space = 0; space < availableMoves.size(); space++){
-            Board boardClone = board.copy();
-            boardClone.update(player.getMarker(), availableMoves.get(space));
-            int currentScore = minimax(boardClone, otherPlayer);
-            boolean isBestScore = isBestScore(currentScore, bestScore, player);
-            if(isBestScore){
-                bestScore = currentScore;
-                bestMove = availableMoves.get(space);
-            }
-        }
-        return bestMove;
-	}
-	
-	public int minimax(Board board, Player player){
-        if(board.isWinner(getPlayer1().getMarker())) return 1;
-        if(board.isWinner(getPlayer2().getMarker())) return -1;
-        if(board.isDraw()) return 0;
-
-        Player otherPlayer = getOtherPlayer(player);
-        ArrayList<Move> availableMoves = board.getAvailableMoves();
-        int bestScore = getDefaultBestScore(player);
-
-        for(int space = 0; space < availableMoves.size(); space++){
-            Board boardClone = board.copy();
-            boardClone.update(player.getMarker(), availableMoves.get(space));
-            int score = minimax(boardClone, otherPlayer);
-            boolean isBestScore = isBestScore(score, bestScore, player);
-            if(isBestScore)
-                bestScore = score;
-        }
-        return bestScore;
-    }
 
 	public void printState() {
-		if (board.isWinner("X"))
+		if (getRules().isWinner("X"))
 			System.out.println("X IS WINNER!");
-		if (board.isWinner("O"))
+		if (getRules().isWinner("O"))
 			System.out.println("O IS WINNER!");
-		if (board.isDraw())
+		if (getRules().isDraw())
 			System.out.println("IT'S A DRAW");
 	}
 
@@ -132,6 +104,14 @@ public class Game {
 
 	public void setRules(GameRules rules) {
 		this.rules = rules;
+	}
+
+	public ArtificialIntelligence getAi() {
+		return ai;
+	}
+
+	public void setAi(ArtificialIntelligence ai) {
+		this.ai = ai;
 	}
 
 }

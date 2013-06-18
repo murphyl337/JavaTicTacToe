@@ -9,6 +9,7 @@ import org.junit.Test;
 import source.ArtificialIntelligence;
 import source.Board;
 import source.Game;
+import source.GameRules;
 import source.Move;
 import source.Player;
 
@@ -16,6 +17,7 @@ public class AITest {
 	Player player1, player2;
 	Board board;
 	Game game;
+	GameRules rules;
 	ArtificialIntelligence ai;
 	Move move;
 	
@@ -24,10 +26,10 @@ public class AITest {
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "human");
 		board = new Board();
-		game = new Game(board, player1, player2);
+		rules = new GameRules(board);
+		game = new Game(rules, board, player1, player2);
 		ai = new ArtificialIntelligence(game);
 		move = new Move(0,0);
-		
 	}
 
 	@Test

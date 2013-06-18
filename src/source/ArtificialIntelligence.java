@@ -3,7 +3,7 @@ package source;
 import java.util.ArrayList;
 
 public class ArtificialIntelligence {
-	public Game game;
+	private Game game;
 	
 	public ArtificialIntelligence(Game game){
 		this.game = game;
@@ -37,8 +37,9 @@ public class ArtificialIntelligence {
 
         for(int space = 0; space < availableMoves.size(); space++){
             Board boardClone = board.copy();
+            GameRules rulesCopy = new GameRules(boardClone);
             boardClone.update(player.getMarker(), availableMoves.get(space));
-            int currentScore = minimax(boardClone, otherPlayer);
+            int currentScore = minimax(rulesCopy, boardClone, otherPlayer);
             boolean isBestScore = isBestScore(currentScore, bestScore, player);
             if(isBestScore){
                 bestScore = currentScore;
@@ -48,10 +49,10 @@ public class ArtificialIntelligence {
         return bestMove;
 	}
 	
-	public int minimax(Board board, Player player){
-        if(board.isWinner(game.getPlayer1().getMarker())) return 1;
-        if(board.isWinner(game.getPlayer2().getMarker())) return -1;
-        if(board.isDraw()) return 0;
+	public int minimax(GameRules rules, Board board, Player player){
+        if(rules.isWinner(getGame().getPlayer1().getMarker())) return 1;
+        if(rules.isWinner(getGame().getPlayer2().getMarker())) return -1;
+        if(rules.isDraw()) return 0;
 
         Player otherPlayer = game.getOtherPlayer(player);
         ArrayList<Move> availableMoves = board.getAvailableMoves();
@@ -59,12 +60,21 @@ public class ArtificialIntelligence {
 
         for(int space = 0; space < availableMoves.size(); space++){
             Board boardClone = board.copy();
+            GameRules rulesCopy= new GameRules(boardClone);
             boardClone.update(player.getMarker(), availableMoves.get(space));
-            int score = minimax(boardClone, otherPlayer);
+            int score = minimax(rulesCopy, boardClone, otherPlayer);
             boolean isBestScore = isBestScore(score, bestScore, player);
             if(isBestScore)
                 bestScore = score;
         }
         return bestScore;
     }
+
+	public Game getGame() {
+		return game;
+	}
+
+	public void setGame(Game game) {
+		this.game = game;
+	}
 }
