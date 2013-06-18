@@ -50,7 +50,7 @@ public class ConsoleHelper {
 		return moveString.matches("[0-2],[0-2]");
 	}
 
-	public Move getMoveInput() {
+	public Position getMoveInput() {
 		System.out.println("What move would you like to take? (row,col)");
 		Scanner scanner = new Scanner(System.in);
 		String moveInput = "";
@@ -67,7 +67,7 @@ public class ConsoleHelper {
 		}
 
 		String[] moveArray = moveInput.split(",");
-		Move move = new Move(moveArray[0], moveArray[1]);
+		Position move = new Position(moveArray[0], moveArray[1]);
 		return move;
 	}
 

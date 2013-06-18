@@ -9,14 +9,14 @@ import org.junit.Test;
 
 import source.Board;
 import source.GameRules;
-import source.Move;
+import source.Position;
 import source.Player;
 
 public class GameRulesTest {
 	Player player1, player2;
 	GameRules rules;
 	Board board;
-	Move move;
+	Position move;
 
 	@Before
 	public void beforeAll() {
@@ -24,7 +24,7 @@ public class GameRulesTest {
 		player2 = new Player("O", "human");
 		board = new Board();
 		rules = new GameRules(board);
-		move = new Move(0, 0);
+		move = new Position(0, 0);
 	}
 
 	@Test
@@ -106,7 +106,7 @@ public class GameRulesTest {
 	@Test
 	public void availableMovesIsEmptyInDrawState() {
 		board = generateDrawState();
-		assertTrue(board.getAvailableMoves().isEmpty());
+		assertTrue(board.getAvailablePositions().isEmpty());
 	}
 
 	public Board generateDrawState() {

@@ -10,7 +10,7 @@ import source.ArtificialIntelligence;
 import source.Board;
 import source.Game;
 import source.GameRules;
-import source.Move;
+import source.Position;
 import source.Player;
 
 public class AITest {
@@ -19,7 +19,7 @@ public class AITest {
 	Game game;
 	GameRules rules;
 	ArtificialIntelligence ai;
-	Move move;
+	Position move;
 	
 	@Before
 	public void before(){
@@ -29,7 +29,7 @@ public class AITest {
 		rules = new GameRules(board);
 		game = new Game(rules, board, player1, player2);
 		ai = new ArtificialIntelligence(game);
-		move = new Move(0,0);
+		move = new Position(0,0);
 	}
 
 	@Test
@@ -70,13 +70,13 @@ public class AITest {
 	@Test
 	public void getBestMoveIsWinningMove(){
 		board.setSpace(move, "X");
-		move = new Move(0,1);
+		move = new Position(0,1);
 		board.setSpace(move, "X");
-		move = new Move(1,0);
+		move = new Position(1,0);
 		board.setSpace(move, "X");
-		move = new Move(1,1);
+		move = new Position(1,1);
 		board.setSpace(move, "O");
-		move = new Move(2,0);
+		move = new Position(2,0);
 		board.setSpace(move, "O");
 		
 		move = ai.getBestMove(board, player2);

@@ -2,7 +2,7 @@ package source;
 
 import java.util.ArrayList;
 
-import source.Move;
+import source.Position;
 
 public class Board {
 	private String[][] state = new String[3][3];
@@ -22,8 +22,8 @@ public class Board {
 		state[row][col] = marker;
 	}
 		
-	public void setSpace(Move move, String marker) {
-		state[move.row][move.col] = marker;
+	public void setSpace(Position position, String marker) {
+		state[position.row][position.col] = marker;
 	}
 	
 	public String toString() {
@@ -37,17 +37,17 @@ public class Board {
 		return sb.toString();
 	}
 	
-	public ArrayList<Move> getAvailableMoves() {
-		ArrayList<Move> availableMoves = new ArrayList<Move>();
+	public ArrayList<Position> getAvailablePositions() {
+		ArrayList<Position> availablePositions = new ArrayList<Position>();
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
 				if (getSpace(row,col).equals("")) {
-					Move move = new Move(row, col);
-					availableMoves.add(move);
+					Position position = new Position(row, col);
+					availablePositions.add(position);
 				}
 			}
 		}
-		return availableMoves;
+		return availablePositions;
 	}
 	
 	public Board copy() {

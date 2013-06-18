@@ -22,7 +22,7 @@ public class Game {
 		return getPlayer1();
 	}
 
-	public void takeTurn(Player player, Move move) {
+	public void takeTurn(Player player, Position move) {
 		board.setSpace(move, player.getMarker());
 	}
 
@@ -43,7 +43,7 @@ public class Game {
 		helper.printTemplateBoard();
 		while (!getRules().isGameOver()) {
 			if (getCurrentPlayer().isHuman()) {
-				Move move = helper.getMoveInput();
+				Position move = helper.getMoveInput();
 				if (!getRules().isValidMove(move)) {
 					System.out.println("Move taken");
 					continue;

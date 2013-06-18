@@ -15,7 +15,7 @@ public class GameRules {
 		this.board = board;
 	}
 	
-	public boolean isValidMove(Move move){ 
+	public boolean isValidMove(Position move){ 
 		return(board.getSpace(move.row, move.col).equals(""));
 	}
 	
@@ -62,7 +62,7 @@ public class GameRules {
 	}
 
 	public boolean isDraw() {
-		return (board.getAvailableMoves().isEmpty() && !isWinner("X") && !isWinner("O"));
+		return (board.getAvailablePositions().isEmpty() && !isWinner("X") && !isWinner("O"));
 	}
 
 	public boolean isGameOver() {

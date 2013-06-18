@@ -12,13 +12,13 @@ import org.junit.Test;
 import source.Board;
 import source.Game;
 import source.GameRules;
-import source.Move;
+import source.Position;
 import source.Player;
 
 public class BoardTest {
 	Player player1, player2;
 	Board board;
-	Move move;
+	Position move;
 	Game game;
 	GameRules rules;
 
@@ -29,7 +29,7 @@ public class BoardTest {
 		board = new Board();
 		rules = new GameRules(board);
 		game = new Game(rules, board, player1, player2);
-		move = new Move(0, 0);
+		move = new Position(0, 0);
 	}
 
 	@Test
@@ -59,18 +59,18 @@ public class BoardTest {
 	}
 
 	@Test
-	public void getAvailableMovesReturnsAllMovesForEmptyBoard() {
-		ArrayList<Move> moves = board.getAvailableMoves();
+	public void getAvailablePositionsReturnsAllMovesForEmptyBoard() {
+		ArrayList<Position> moves = board.getAvailablePositions();
 		assertEquals(9, moves.size());
 	}
 
 	@Test
-	public void getAvailableMovesLeavesOutMarkedSpaces() {
+	public void getAvailablePositionsLeavesOutMarkedSpaces() {
 		move.row = 0;
 		move.col = 0;
 		game.takeTurn(player1, move);
 
-		ArrayList<Move> moves = board.getAvailableMoves();
+		ArrayList<Position> moves = board.getAvailablePositions();
 
 		assertEquals(8, moves.size());
 	}
@@ -78,7 +78,7 @@ public class BoardTest {
 	@Test
 	public void availableMovesIsEmptyInDrawState() {
 		board = generateDrawState();
-		assertTrue(board.getAvailableMoves().isEmpty());
+		assertTrue(board.getAvailablePositions().isEmpty());
 	}
 
 	public Board generateDrawState() {
