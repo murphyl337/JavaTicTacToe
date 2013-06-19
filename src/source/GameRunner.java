@@ -10,8 +10,8 @@ public class GameRunner {
 	 */
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		ConsoleHelper consoleHelper = new ConsoleHelper();
-		Game game = consoleHelper.setUpGame(scanner);
+		ConsoleHelper consoleHelper = new ConsoleHelper(scanner);
+		Game game = consoleHelper.setUpGame();
 		game.playGame();
 	}
 }

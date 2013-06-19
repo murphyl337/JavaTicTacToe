@@ -1,5 +1,7 @@
 package source;
 
+import java.util.Scanner;
+
 public class Game {
 	private GameRules rules;
 	private Board board;
@@ -38,7 +40,8 @@ public class Game {
 	}
 
 	public void playGame() {
-		ConsoleHelper helper = new ConsoleHelper();
+		Scanner scanner = new Scanner(System.in);
+		ConsoleHelper helper = new ConsoleHelper(scanner);
 		System.out.println("These are the moves you can make: ");
 		helper.printTemplateBoard();
 		while (!getRules().isGameOver()) {

@@ -3,6 +3,8 @@ package test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Scanner;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,10 +12,12 @@ import source.ConsoleHelper;
 
 public class ConsoleHelperTest {
 	ConsoleHelper consoleHelper;
+	Scanner scanner;
 	
 	@Before
 	public void beforeAll(){
-		consoleHelper = new ConsoleHelper();
+		scanner = new Scanner(System.in);
+		consoleHelper = new ConsoleHelper(scanner);
 	}
 	
 	@Test

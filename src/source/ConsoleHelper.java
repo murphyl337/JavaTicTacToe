@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ConsoleHelper {
-	PlayerConfigFactory configFactory;
+	private PlayerConfigFactory configFactory;
+	private Scanner scanner;
 
-	public ConsoleHelper() {
+	public ConsoleHelper(Scanner scanner) {
 		configFactory = new PlayerConfigFactory();
+		this.scanner = scanner;
 	}
 
 	public void greetUser() {
@@ -52,12 +54,11 @@ public class ConsoleHelper {
 
 	public Position getMoveInput() {
 		System.out.println("What move would you like to take? (row,col)");
-		Scanner scanner = new Scanner(System.in);
 		String moveInput = "";
 		boolean validMoveInput = false;
 
 		while (!validMoveInput) {
-			String move = scanner.nextLine();
+			String move = getScanner().nextLine();
 			if (!isValidMoveInput(move)) {
 				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
 				continue;
@@ -71,14 +72,13 @@ public class ConsoleHelper {
 		return move;
 	}
 
-	public Game setUpGame(Scanner scanner) {
+	public Game setUpGame() {
 		greetUser();
-		scanner = new Scanner(System.in);
 		String playerConfig = "";
 		boolean validPlayerConfig = false;
 
 		while (!validPlayerConfig) {
-			String config = scanner.nextLine();
+			String config = getScanner().nextLine();
 			if (!isValidPlayerConfig(config)) {
 				System.out
 						.println("Incorrect configuration. (hvh, hvc, cvh, cvc)");
@@ -93,5 +93,13 @@ public class ConsoleHelper {
 		GameRules rules = new GameRules(board);
 		Game game = new Game(rules, board, players.get(0), players.get(1));
 		return game;
+	}
+
+	public Scanner getScanner() {
+		return scanner;
+	}
+
+	public void setScanner(Scanner scanner) {
+		this.scanner = scanner;
 	}
 }
