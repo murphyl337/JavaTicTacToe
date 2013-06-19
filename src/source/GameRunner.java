@@ -3,6 +3,7 @@ package source;
 import java.util.Scanner;
 
 import source.TTT.Game;
+import source.TTT.GameRules;
 import source.TTT.Player;
 import source.TTT.Position;
 import source.console.ConsoleHelper;
@@ -21,11 +22,13 @@ public class GameRunner {
 
 	public static void playGame(Game game, ConsoleHelper helper) {
 		helper.getWriter().printTemplateBoard();
-		while (!game.getRules().isGameOver()) {
+		game.getRules();
+		while (!GameRules.isGameOver(game.getBoard())) {
 			Player currentPlayer = game.getCurrentPlayer();
 			if (game.getCurrentPlayer().isHuman()) {
 				Position move = helper.getReader().getMoveInput();
-				if (!game.getRules().isValidMove(move)) {
+				game.getRules();
+				if (!GameRules.isValidMove(move, game.getBoard())) {
 					System.out.println("Move taken");
 					continue;
 				}

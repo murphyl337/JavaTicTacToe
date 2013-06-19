@@ -1,30 +1,19 @@
 package source.TTT;
 
 public class GameRules {
-	private Board board;
-
-	public GameRules(Board board) {
-		this.board = board;
+	public GameRules() {
 	}
 
-	public Board getBoard() {
-		return this.board;
-	}
-
-	public void setBoard(Board board) {
-		this.board = board;
-	}
-
-	public boolean isValidMove(Position move) {
+	public static boolean isValidMove(Position move, Board board) {
 		return (board.getSpace(move.row, move.col).equals(""));
 	}
 
-	public boolean isValidMoveAsString(String move) {
+	public static boolean isValidMoveAsString(String move, Board board) {
 		Position position = new Position(move);
-		return (isValidMove(position));
+		return (isValidMove(position, board));
 	}
 
-	public boolean isWinnerHorizontally(String marker) {
+	public static boolean isWinnerHorizontally(String marker, Board board) {
 		boolean winner = false;
 
 		for (int row = 0; row < 3; row++) {
@@ -37,7 +26,7 @@ public class GameRules {
 		return winner;
 	}
 
-	public boolean isWinnerVertically(String marker) {
+	public static boolean isWinnerVertically(String marker, Board board) {
 		boolean winner = false;
 
 		for (int col = 0; col < 3; col++) {
@@ -50,7 +39,7 @@ public class GameRules {
 		return winner;
 	}
 
-	public boolean isWinnerDiagonally(String marker) {
+	public static boolean isWinnerDiagonally(String marker, Board board) {
 		boolean winner = false;
 		if (board.getSpace(0, 0).equals(marker)
 				&& board.getSpace(1, 1).equals(marker)
@@ -65,16 +54,16 @@ public class GameRules {
 		return winner;
 	}
 
-	public boolean isWinner(String marker) {
-		return isWinnerHorizontally(marker) || isWinnerVertically(marker)
-				|| isWinnerDiagonally(marker);
+	public static boolean isWinner(String marker, Board board) {
+		return isWinnerHorizontally(marker, board) || isWinnerVertically(marker, board)
+				|| isWinnerDiagonally(marker, board);
 	}
 
-	public boolean isDraw() {
-		return (board.getAvailablePositions().isEmpty() && !isWinner("X") && !isWinner("O"));
+	public static boolean isDraw(Board board) {
+		return (board.getAvailablePositions().isEmpty() && !isWinner("X", board) && !isWinner("O", board));
 	}
 
-	public boolean isGameOver() {
-		return (isWinner("X") || isWinner("O") || isDraw());
+	public static boolean isGameOver(Board board) {
+		return (isWinner("X", board) || isWinner("O", board) || isDraw(board));
 	}
 }

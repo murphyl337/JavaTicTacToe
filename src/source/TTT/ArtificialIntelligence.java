@@ -37,9 +37,8 @@ public class ArtificialIntelligence {
 
 		for (int space = 0; space < availablePositions.size(); space++) {
 			Board boardClone = board.copy();
-			GameRules rulesCopy = new GameRules(boardClone);
 			boardClone.setSpace(availablePositions.get(space), player.getMarker());
-			int currentScore = minimax(rulesCopy, boardClone, otherPlayer);
+			int currentScore = minimax(boardClone, otherPlayer);
 			boolean isBestScore = isBestScore(currentScore, bestScore, player);
 			if (isBestScore) {
 				bestScore = currentScore;
@@ -49,12 +48,12 @@ public class ArtificialIntelligence {
 		return bestMove;
 	}
 
-	public int minimax(GameRules rules, Board board, Player player) {
-		if (rules.isWinner(getGame().getPlayer1().getMarker()))
+	public int minimax(Board board, Player player) {
+		if (GameRules.isWinner("X", board))
 			return 1;
-		if (rules.isWinner(getGame().getPlayer2().getMarker()))
+		if (GameRules.isWinner("O", board))
 			return -1;
-		if (rules.isDraw())
+		if (GameRules.isDraw(board))
 			return 0;
 
 		Player otherPlayer = game.getOtherPlayer(player);
@@ -63,9 +62,8 @@ public class ArtificialIntelligence {
 
 		for (int space = 0; space < availablePositions.size(); space++) {
 			Board boardClone = board.copy();
-			GameRules rulesCopy = new GameRules(boardClone);
 			boardClone.setSpace(availablePositions.get(space), player.getMarker());
-			int score = minimax(rulesCopy, boardClone, otherPlayer);
+			int score = minimax(boardClone, otherPlayer);
 			boolean isBestScore = isBestScore(score, bestScore, player);
 			if (isBestScore)
 				bestScore = score;

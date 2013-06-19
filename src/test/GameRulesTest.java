@@ -23,17 +23,16 @@ public class GameRulesTest {
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "human");
 		board = new Board();
-		rules = new GameRules(board);
 		move = new Position(0, 0);
 	}
 
 	@Test
 	public void isValidMoveReturnTest() {
-		assertTrue(rules.isValidMove(move));
+		assertTrue(GameRules.isValidMove(move, board));
 
 		board.setSpace(move.row, move.col, player1.getMarker());
 
-		assertFalse(rules.isValidMove(move));
+		assertFalse(GameRules.isValidMove(move, board));
 	}
 
 	@Test
@@ -44,7 +43,7 @@ public class GameRulesTest {
 			board.setSpace(move.row, move.col, "X");
 		}
 
-		assertEquals(true, rules.isWinnerHorizontally("X"));
+		assertEquals(true, GameRules.isWinnerHorizontally("X", board));
 	}
 
 	@Test
@@ -53,7 +52,7 @@ public class GameRulesTest {
 			board.setSpace(row, 0, "X");
 		}
 
-		assertEquals(true, rules.isWinnerVertically("X"));
+		assertEquals(true, GameRules.isWinnerVertically("X", board));
 	}
 
 	@Test
@@ -64,7 +63,7 @@ public class GameRulesTest {
 			board.setSpace(space, space, "X");
 		}
 
-		assertEquals(true, rules.isWinnerDiagonally("X"));
+		assertEquals(true, GameRules.isWinnerDiagonally("X", board));
 	}
 
 	@Test
@@ -81,26 +80,24 @@ public class GameRulesTest {
 		move.col = 0;
 		board.setSpace(move, "X");
 
-		assertTrue(rules.isWinnerDiagonally("X"));
+		assertTrue(GameRules.isWinnerDiagonally("X", board));
 	}
 
 	@Test
 	public void isDrawReturnsTrueWhenAllSpacesTakenAndNoWinner() {
 		board = generateDrawState();
-		rules.setBoard(board);
-		assertTrue(rules.isDraw());
+		assertTrue(GameRules.isDraw(board));
 	}
 
 	@Test
 	public void isGameOverReturnsTrueWhenThereIsAWinnerOrDraw() {
 		board = generateDrawState();
-		rules.setBoard(board);
-		assertTrue(rules.isGameOver());
+		assertTrue(GameRules.isGameOver(board));
 	}
 
 	@Test
 	public void isGameOverReturnsFalseWhenNoWinnerAndNoDraw() {
-		assertEquals(false, rules.isGameOver());
+		assertEquals(false, GameRules.isGameOver(board));
 	}
 
 	@Test

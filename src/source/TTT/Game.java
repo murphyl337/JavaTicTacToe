@@ -7,9 +7,8 @@ public class Game {
 
 	private Player player1, player2, currentPlayer;
 
-	public Game(GameRules rules, Board board, Player player1, Player player2) {
+	public Game(Board board, Player player1, Player player2) {
 		this.board = board;
-		this.rules = rules;
 		this.artificialIntelligence = new ArtificialIntelligence(this);
 		this.player1 = player1;
 		this.player2 = player2;

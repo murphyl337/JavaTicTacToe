@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import source.TTT.Board;
 import source.TTT.Game;
-import source.TTT.GameRules;
 import source.TTT.Player;
 import source.TTT.PlayerConfigFactory;
 
@@ -26,11 +25,10 @@ public class ConsoleHelper {
 
 	public Game setUpGame() {
 		writer.printGreeting();
-		ArrayList<Player> players = configFactory
-				.createConfiguration(getReader().getPlayerConfig());
+		String playerConfig = getReader().getPlayerConfig();
+		ArrayList<Player> players = configFactory.createConfiguration(playerConfig);
 		Board board = new Board();
-		GameRules rules = new GameRules(board);
-		Game game = new Game(rules, board, players.get(0), players.get(1));
+		Game game = new Game(board, players.get(0), players.get(1));
 		return game;
 	}
 

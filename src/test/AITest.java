@@ -26,8 +26,7 @@ public class AITest {
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "human");
 		board = new Board();
-		rules = new GameRules(board);
-		game = new Game(rules, board, player1, player2);
+		game = new Game(board, player1, player2);
 		ai = new ArtificialIntelligence(game);
 		move = new Position(0,0);
 	}

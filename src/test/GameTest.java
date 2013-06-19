@@ -24,8 +24,7 @@ public class GameTest {
 		player1 = new Player("X", "human");
 		player2 = new Player("O", "computer");
 		board = new Board();
-		rules = new GameRules(board);
-		game = new Game(rules, board, player1, player2);
+		game = new Game(board, player1, player2);
 		move = new Position(0,0);
 	}
 	

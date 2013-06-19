@@ -2,6 +2,7 @@ package source.console;
 
 import source.TTT.Board;
 import source.TTT.Game;
+import source.TTT.GameRules;
 
 public class ConsoleWriter {
 	public void printGreeting() {
@@ -26,12 +27,14 @@ public class ConsoleWriter {
 	}
 	
 	public void printGameState(Game game){
-		if(game.getRules().isWinner("X"))
+		game.getRules();
+		if(GameRules.isWinner("X", game.getBoard()))
 			System.out.println("X IS WINNER!");
-		else if(game.getRules().isWinner("O"))
+		else if(GameRules.isWinner("O", game.getBoard()))
 			System.out.println("O IS WINNER!");
-		else if(game.getRules().isDraw())
+		else if(GameRules.isDraw(game.getBoard()))
 			System.out.println("IT'S A DRAW!");
+			
 	}
 	
 	public void printBoard(Board board){
