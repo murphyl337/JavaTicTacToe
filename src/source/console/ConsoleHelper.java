@@ -24,15 +24,10 @@ public class ConsoleHelper {
 		this.setReader(new ConsoleReader(scanner));
 	}
 
-	public ArrayList<Player> createPlayers(String playerConfig) {
-		ArrayList<Player> players = configFactory
-				.createConfiguration(playerConfig);
-		return players;
-	}
-
 	public Game setUpGame() {
 		writer.printGreeting();
-		ArrayList<Player> players = createPlayers(getReader().getPlayerConfig());
+		ArrayList<Player> players = configFactory
+				.createConfiguration(getReader().getPlayerConfig());
 		Board board = new Board();
 		GameRules rules = new GameRules(board);
 		Game game = new Game(rules, board, players.get(0), players.get(1));
