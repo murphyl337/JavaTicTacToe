@@ -32,34 +32,27 @@ public class Game {
 		setCurrentPlayer(getOtherPlayer(getCurrentPlayer()));
 	}
 
-	private void makeComputerMove() {
-		Player currentPlayer = getCurrentPlayer();
-		Board board = getBoard();
-		takeTurn(currentPlayer, artificialIntelligence.getBestMove(board, currentPlayer));
-	}
-
-	public void playGame() {
-		Scanner scanner = new Scanner(System.in);
-		ConsoleHelper helper = new ConsoleHelper(scanner);
-		System.out.println("These are the moves you can make: ");
-		helper.printTemplateBoard();
-		while (!getRules().isGameOver()) {
-			if (getCurrentPlayer().isHuman()) {
-				Position move = helper.getMoveInput();
-				if (!getRules().isValidMove(move)) {
-					System.out.println("Move taken");
-					continue;
-				}
-				takeTurn(getCurrentPlayer(), move);
-				helper.printBoard(getBoard());
-			} else {
-				makeComputerMove();
-				helper.printBoard(getBoard());
-			}
-			nextTurn();
-		}
-		helper.printGameState(this);
-	}
+//	public void playGame() {
+//		Scanner scanner = new Scanner(System.in);
+//		ConsoleHelper helper = new ConsoleHelper(scanner);
+//		helper.printTemplateBoard();
+//		while (!getRules().isGameOver()) {
+//			if (getCurrentPlayer().isHuman()) {
+//				Position move = helper.getMoveInput();
+//				if (!getRules().isValidMove(move)) {
+//					System.out.println("Move taken");
+//					continue;
+//				}
+//				takeTurn(getCurrentPlayer(), move);
+//				helper.printBoard(getBoard());
+//			} else {
+//				makeComputerMove();
+//				helper.printBoard(getBoard());
+//			}
+//			nextTurn();
+//		}
+//		helper.printGameState(this);
+//	}
 
 	public Board getBoard() {
 		return board;

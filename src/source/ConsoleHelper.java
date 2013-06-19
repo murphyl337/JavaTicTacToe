@@ -22,6 +22,7 @@ public class ConsoleHelper {
 	}
 	
 	public void printTemplateBoard(){
+		System.out.println("These are the moves you can make: ");
 		StringBuilder sb = new StringBuilder();
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
