@@ -26,17 +26,6 @@ public class Board {
 		state[position.row][position.col] = marker;
 	}
 	
-	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (int row = 0; row < 3; row++) {
-			for (int col = 0; col < 3; col++) {
-				sb.append("[" + getSpace(row,col) + "]");
-			}
-			sb.append("\n");
-		}
-		return sb.toString();
-	}
-	
 	public ArrayList<Position> getAvailablePositions() {
 		ArrayList<Position> availablePositions = new ArrayList<Position>();
 		for (int row = 0; row < 3; row++) {

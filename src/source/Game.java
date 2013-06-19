@@ -36,7 +36,6 @@ public class Game {
 		Player currentPlayer = getCurrentPlayer();
 		Board board = getBoard();
 		takeTurn(currentPlayer, artificialIntelligence.getBestMove(board, currentPlayer));
-		System.out.println(board.toString());
 	}
 
 	public void playGame() {
@@ -52,22 +51,14 @@ public class Game {
 					continue;
 				}
 				takeTurn(getCurrentPlayer(), move);
-				System.out.println(getBoard().toString());
+				helper.printBoard(getBoard());
 			} else {
 				makeComputerMove();
+				helper.printBoard(getBoard());
 			}
 			nextTurn();
 		}
-		printState();
-	}
-
-	public void printState() {
-		if (getRules().isWinner("X"))
-			System.out.println("X IS WINNER!");
-		if (getRules().isWinner("O"))
-			System.out.println("O IS WINNER!");
-		if (getRules().isDraw())
-			System.out.println("IT'S A DRAW");
+		helper.printGameState(this);
 	}
 
 	public Board getBoard() {

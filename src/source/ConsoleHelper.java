@@ -25,7 +25,7 @@ public class ConsoleHelper {
 		StringBuilder sb = new StringBuilder();
 		for (int row = 0; row < 3; row++) {
 			for (int col = 0; col < 3; col++) {
-				sb.append("[" + row + " , " + col + "]");
+				sb.append("[" + row + "," + col + "]");
 			}
 			sb.append("\n");
 		}
@@ -71,28 +71,49 @@ public class ConsoleHelper {
 		Position move = new Position(moveArray[0], moveArray[1]);
 		return move;
 	}
-
-	public Game setUpGame() {
-		greetUser();
-		String playerConfig = "";
+	
+	public String getPlayerConfig(){
 		boolean validPlayerConfig = false;
-
+		String config = "";
 		while (!validPlayerConfig) {
-			String config = getScanner().nextLine();
+			config = getScanner().nextLine();
 			if (!isValidPlayerConfig(config)) {
 				System.out
 						.println("Incorrect configuration. (hvh, hvc, cvh, cvc)");
 				continue;
 			}
 			validPlayerConfig = true;
-			playerConfig = config;
 		}
+		return config;
+	}
 
-		ArrayList<Player> players = createPlayers(playerConfig);
+	public Game setUpGame() {
+		greetUser();
+		ArrayList<Player> players = createPlayers(getPlayerConfig());
 		Board board = new Board();
 		GameRules rules = new GameRules(board);
 		Game game = new Game(rules, board, players.get(0), players.get(1));
 		return game;
+	}
+	
+	public void printGameState(Game game){
+		if(game.getRules().isWinner("X"))
+			System.out.println("X IS WINNER!");
+		else if(game.getRules().isWinner("O"))
+			System.out.println("O IS WINNER!");
+		else if(game.getRules().isDraw())
+			System.out.println("IT'S A DRAW!");
+	}
+	
+	public void printBoard(Board board){
+		StringBuilder sb = new StringBuilder();
+		for (int row = 0; row < 3; row++) {
+			for (int col = 0; col < 3; col++) {
+				sb.append("[" + board.getSpace(row,col) + "]");
+			}
+			sb.append("\n");
+		}
+		System.out.println(sb.toString());
 	}
 
 	public Scanner getScanner() {
