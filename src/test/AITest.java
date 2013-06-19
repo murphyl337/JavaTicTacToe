@@ -6,12 +6,12 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.ArtificialIntelligence;
-import source.Board;
-import source.Game;
-import source.GameRules;
-import source.Position;
-import source.Player;
+import source.TTT.ArtificialIntelligence;
+import source.TTT.Board;
+import source.TTT.Game;
+import source.TTT.GameRules;
+import source.TTT.Player;
+import source.TTT.Position;
 
 public class AITest {
 	Player player1, player2;

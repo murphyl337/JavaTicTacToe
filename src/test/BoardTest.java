@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.Board;
-import source.Game;
-import source.GameRules;
-import source.Position;
-import source.Player;
+import source.TTT.Board;
+import source.TTT.Game;
+import source.TTT.GameRules;
+import source.TTT.Player;
+import source.TTT.Position;
 
 public class BoardTest {
 	Player player1, player2;

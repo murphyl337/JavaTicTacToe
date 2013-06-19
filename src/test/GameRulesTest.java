@@ -7,10 +7,10 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.Board;
-import source.GameRules;
-import source.Position;
-import source.Player;
+import source.TTT.Board;
+import source.TTT.GameRules;
+import source.TTT.Player;
+import source.TTT.Position;
 
 public class GameRulesTest {
 	Player player1, player2;

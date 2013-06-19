@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.Player;
-import source.PlayerConfigFactory;
+import source.TTT.Player;
+import source.TTT.PlayerConfigFactory;
 
 public class PlayerConfigFactoryTest {
 	PlayerConfigFactory configFactory;

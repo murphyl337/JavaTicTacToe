@@ -2,6 +2,11 @@ package source;
 
 import java.util.Scanner;
 
+import source.TTT.Game;
+import source.TTT.Player;
+import source.TTT.Position;
+import source.console.ConsoleHelper;
+
 public class GameRunner {
 
 	/**
@@ -11,26 +16,33 @@ public class GameRunner {
 		Scanner scanner = new Scanner(System.in);
 		ConsoleHelper consoleHelper = new ConsoleHelper(scanner);
 		Game game = consoleHelper.setUpGame();
-		playGame(game);
+		playGame(game, consoleHelper);
 	}
 
-	public static void playGame(Game game) {
-		Scanner scanner = new Scanner(System.in);
-		ConsoleHelper helper = new ConsoleHelper(scanner);
-		helper.printTemplateBoard();
+	public static void playGame(Game game, ConsoleHelper helper) {
+		helper.getWriter().printTemplateBoard();
 		while (!game.getRules().isGameOver()) {
 			Player currentPlayer = game.getCurrentPlayer();
 			if (game.getCurrentPlayer().isHuman()) {
-				Position move = helper.getMoveInput(game.getRules());
+				Position move = helper.getReader().getMoveInput();
+				if (!game.getRules().isValidMove(move)) {
+					System.out.println("Move taken");
+					continue;
+				}
 				game.takeTurn(currentPlayer, move);
-				helper.printBoard(game.getBoard());
+				helper.getWriter().printBoard(game.getBoard());
 			} else {
-				game.takeTurn(currentPlayer, game.getArtificialIntelligence()
-						.getBestMove(game.getBoard(), currentPlayer));
-				helper.printBoard(game.getBoard());
+				makeComputerMove(game, helper, currentPlayer);
 			}
 			game.nextTurn();
 		}
-		helper.printGameState(game);
+		helper.getWriter().printGameState(game);
+	}
+
+	private static void makeComputerMove(Game game, ConsoleHelper helper,
+			Player currentPlayer) {
+		game.takeTurn(currentPlayer, game.getArtificialIntelligence()
+				.getBestMove(game.getBoard(), currentPlayer));
+		helper.getWriter().printBoard(game.getBoard());
 	}
 }

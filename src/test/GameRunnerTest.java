@@ -2,10 +2,10 @@ package test;
 
 import org.junit.Before;
 
-import source.Board;
-import source.Game;
 import source.GameRunner;
-import source.Player;
+import source.TTT.Board;
+import source.TTT.Game;
+import source.TTT.Player;
 
 public class GameRunnerTest {
 	Game game;

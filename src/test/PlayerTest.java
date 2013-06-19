@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import source.Player;
+import source.TTT.Player;
 
 public class PlayerTest {
 	Player player1, player2;
