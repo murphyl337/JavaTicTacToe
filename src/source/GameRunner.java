@@ -21,11 +21,7 @@ public class GameRunner {
 		while (!game.getRules().isGameOver()) {
 			Player currentPlayer = game.getCurrentPlayer();
 			if (game.getCurrentPlayer().isHuman()) {
-				Position move = helper.getMoveInput();
-				if (!game.getRules().isValidMove(move)) {
-					System.out.println("Move taken");
-					continue;
-				}
+				Position move = helper.getMoveInput(game.getRules());
 				game.takeTurn(currentPlayer, move);
 				helper.printBoard(game.getBoard());
 			} else {

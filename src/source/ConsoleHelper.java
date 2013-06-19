@@ -53,23 +53,23 @@ public class ConsoleHelper {
 		return moveString.matches("[0-2],[0-2]");
 	}
 
-	public Position getMoveInput() {
+	public Position getMoveInput(GameRules rules) {
 		System.out.println("What move would you like to take? (row,col)");
-		String moveInput = "";
 		boolean validMoveInput = false;
-
+		Position move = null;
 		while (!validMoveInput) {
-			String move = getScanner().nextLine();
-			if (!isValidMoveInput(move)) {
+			String moveString = getScanner().nextLine();
+			if (!isValidMoveInput(moveString)) {
 				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
 				continue;
 			}
+			move = new Position(moveString);
+			if(!rules.isValidMove(move)){
+				System.out.println("Move taken, please make another move");
+				continue;
+			}
 			validMoveInput = true;
-			moveInput = move;
 		}
-
-		String[] moveArray = moveInput.split(",");
-		Position move = new Position(moveArray[0], moveArray[1]);
 		return move;
 	}
 	

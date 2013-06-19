@@ -13,4 +13,10 @@ public class Position{
 		this.row = Integer.parseInt(row);
 		this.col = Integer.parseInt(col);
 	}
+	
+	public Position(String rowCommaCol){
+		String[] positionString = rowCommaCol.split(",");
+		this.row = Integer.parseInt(positionString[0]);
+		this.col = Integer.parseInt(positionString[1]);
+	}
 }
