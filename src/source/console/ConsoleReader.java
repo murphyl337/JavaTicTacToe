@@ -19,12 +19,12 @@ public class ConsoleReader {
 		Position move = null;
 		while (!validMoveInput) {
 			String moveString = getScanner().nextLine();
-			if (!validator.isValidMoveInput(moveString)) {
-				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
-				continue;
+			if(validator.isValidMoveInput(moveString)){
+				validMoveInput = true;
+				move = new Position(moveString);
 			}
-			validMoveInput = true;
-			move = new Position(moveString);
+			else
+				System.out.println("Incorrect input. (e.g: 0,0 - 2,2)");
 		}
 		return move;
 	}
@@ -34,11 +34,12 @@ public class ConsoleReader {
 		String config = "";
 		while (!validPlayerConfig) {
 			config = getScanner().nextLine();
-			if (!validator.isValidPlayerConfig(config)) {
-				System.out
-						.println("Incorrect configuration. (hvh, hvc, cvh, cvc)");
-				continue;
+			if (validator.isValidPlayerConfig(config)) {
+				validPlayerConfig = true;
 			}
+			else
+				System.out
+				.println("Incorrect configuration. (hvh, hvc, cvh, cvc)");
 			validPlayerConfig = true;
 		}
 		return config;

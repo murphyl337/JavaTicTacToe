@@ -22,12 +22,10 @@ public class GameRunner {
 
 	public static void playGame(Game game, ConsoleHelper helper) {
 		helper.getWriter().printTemplateBoard();
-		game.getRules();
 		while (!GameRules.isGameOver(game.getBoard())) {
 			Player currentPlayer = game.getCurrentPlayer();
 			if (game.getCurrentPlayer().isHuman()) {
 				Position move = helper.getReader().getMoveInput();
-				game.getRules();
 				if (!GameRules.isValidMove(move, game.getBoard())) {
 					System.out.println("Move taken");
 					continue;

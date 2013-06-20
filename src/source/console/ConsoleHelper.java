@@ -20,11 +20,11 @@ public class ConsoleHelper {
 		this.configFactory = new PlayerConfigFactory();
 		this.validator = new ConsoleValidator();
 		this.writer = new ConsoleWriter();
-		this.setReader(new ConsoleReader(scanner));
+		this.reader = new ConsoleReader(scanner);
 	}
 
 	public Game setUpGame() {
-		writer.printGreeting();
+		getWriter().printGreeting();
 		String playerConfig = getReader().getPlayerConfig();
 		ArrayList<Player> players = configFactory.createConfiguration(playerConfig);
 		Board board = new Board();

@@ -27,7 +27,6 @@ public class ConsoleWriter {
 	}
 	
 	public void printGameState(Game game){
-		game.getRules();
 		if(GameRules.isWinner("X", game.getBoard()))
 			System.out.println("X IS WINNER!");
 		else if(GameRules.isWinner("O", game.getBoard()))

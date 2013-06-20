@@ -1,7 +1,6 @@
 package source.TTT;
 
 public class Game {
-	private GameRules rules;
 	private Board board;
 	private ArtificialIntelligence artificialIntelligence;
 
@@ -55,14 +54,6 @@ public class Game {
 
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
-	}
-
-	public GameRules getRules() {
-		return rules;
-	}
-
-	public void setRules(GameRules rules) {
-		this.rules = rules;
 	}
 
 	public ArtificialIntelligence getArtificialIntelligence() {

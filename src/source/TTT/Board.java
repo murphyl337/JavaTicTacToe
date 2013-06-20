@@ -13,18 +13,6 @@ public class Board {
 				setSpace(row, col, "");
 		}
 	}
-
-	public String getSpace(int row, int col){
-		return state[row][col]; 
-	}
-	
-	public void setSpace(int row, int col, String marker){
-		state[row][col] = marker;
-	}
-		
-	public void setSpace(Position position, String marker) {
-		state[position.row][position.col] = marker;
-	}
 	
 	public ArrayList<Position> getAvailablePositions() {
 		ArrayList<Position> availablePositions = new ArrayList<Position>();
@@ -47,4 +35,18 @@ public class Board {
 		}
 		return copy;
 	}
+
+	public String getSpace(int row, int col){
+		return state[row][col]; 
+	}
+	
+	public void setSpace(int row, int col, String marker){
+		state[row][col] = marker;
+	}
+		
+	public void setSpace(Position position, String marker) {
+		state[position.row][position.col] = marker;
+	}
+	
+	
 }

@@ -49,9 +49,9 @@ public class ArtificialIntelligence {
 	}
 
 	public int minimax(Board board, Player player) {
-		if (GameRules.isWinner("X", board))
+		if (GameRules.isWinner(game.getPlayer1().getMarker(), board))
 			return 1;
-		if (GameRules.isWinner("O", board))
+		if (GameRules.isWinner(game.getPlayer2().getMarker(), board))
 			return -1;
 		if (GameRules.isDraw(board))
 			return 0;
