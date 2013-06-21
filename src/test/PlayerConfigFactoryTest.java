@@ -9,6 +9,8 @@ import org.junit.Test;
 
 import source.TTT.Player;
 import source.TTT.PlayerConfigFactory;
+import source.handles.HumanStrategyHandle;
+import source.handles.MinimaxStrategyHandle;
 
 public class PlayerConfigFactoryTest {
 	PlayerConfigFactory configFactory;
@@ -22,33 +24,33 @@ public class PlayerConfigFactoryTest {
 	public void canCreateHVHConfig(){
 		ArrayList<Player> players = configFactory.createHVHConfig();
 		assertEquals(2, players.size());
-		assertEquals("human", players.get(0).getType());
+		assertEquals(HumanStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
 		assertEquals("X", players.get(0).getMarker());
-		assertEquals("human", players.get(1).getType());
+		assertEquals(HumanStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
 	}
 	
 	@Test
 	public void canCreateHVConfig(){
 		ArrayList<Player> players = configFactory.createHVCConfig();
 		assertEquals(2, players.size());
-		assertEquals("human", players.get(0).getType());
-		assertEquals("computer", players.get(1).getType());
+		assertEquals(HumanStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
+		assertEquals(MinimaxStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
 	}
 	
 	@Test
 	public void canCreateCVHConfig(){
 		ArrayList<Player> players = configFactory.createCVHConfig();
 		assertEquals(2, players.size());
-		assertEquals("computer", players.get(0).getType());
-		assertEquals("human", players.get(1).getType());
+		assertEquals(MinimaxStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
+		assertEquals(HumanStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
 	}
 	
 	@Test
 	public void canCreateCVCConfig(){
 		ArrayList<Player> players = configFactory.createCVCConfig();
 		assertEquals(2, players.size());
-		assertEquals("computer", players.get(0).getType());
-		assertEquals("computer", players.get(1).getType());
+		assertEquals(MinimaxStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
+		assertEquals(MinimaxStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
 	}
 
 }

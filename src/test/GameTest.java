@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import source.TTT.Board;
 import source.TTT.Game;
-import source.TTT.GameRules;
 import source.TTT.Player;
 import source.TTT.Position;
 
@@ -17,12 +16,11 @@ public class GameTest {
 	Board board;
 	Game game;
 	Position move;
-	GameRules rules;
 
 	@Before
 	public void before(){
-		player1 = new Player("X", "human");
-		player2 = new Player("O", "computer");
+		player1 = new Player("X", null);
+		player2 = new Player("O", null);
 		board = new Board();
 		game = new Game(board, player1, player2);
 		move = new Position(0,0);
@@ -35,7 +33,7 @@ public class GameTest {
 	
 	@Test
 	public void gameBoardUpdatesWhenTurnIsTaken(){
-		game.takeTurn(player1, move);
+		game.updateBoard(player1, move);
 		
 		assertEquals("X", game.getBoard().getSpace(0, 0));
 	}

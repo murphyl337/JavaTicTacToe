@@ -6,35 +6,32 @@ import org.junit.Before;
 import org.junit.Test;
 
 import source.TTT.Player;
+import source.handles.HumanStrategyHandle;
+import source.handles.MinimaxStrategyHandle;
 
 public class PlayerTest {
 	Player player1, player2;
+	HumanStrategyHandle humanHandle;
+	MinimaxStrategyHandle minimaxHandle;
 
 	@Before
 	public void before(){
-		player1 = new Player("X", "computer");
-		player2 = new Player("O", "human");
+		humanHandle = new HumanStrategyHandle();
+		minimaxHandle = new MinimaxStrategyHandle();
+		
+		player1 = new Player("X", minimaxHandle);
+		player2 = new Player("O", humanHandle);
 	}
 	
 	@Test
-	public void playerHasAMarker() {
-		assert(player1.getMarker().equals("X"));
+	public void hasAMarker(){
+		assertEquals("X", player1.getMarker());
 	}
 	
 	@Test
-	public void playerHasAType(){
-		assert(player1.getType().equals("computer"));
-	}
-
-	@Test
-	public void isHumanReturnsTrueForHumanPlayers(){
-		assertFalse(player1.isHuman());
-		assertTrue(player2.isHuman());
+	public void hasAHandle(){
+		assertNotNull(player1.getStrategyHandle());
 	}
 	
-	@Test
-	public void isComputerReturnsTrueForComputerPlayers(){
-		assertTrue(player1.isComputer());
-		assertFalse(player2.isComputer());
-	}
+	
 }

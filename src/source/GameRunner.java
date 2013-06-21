@@ -5,7 +5,6 @@ import java.util.Scanner;
 import source.TTT.Game;
 import source.TTT.GameRules;
 import source.TTT.Player;
-import source.TTT.Position;
 import source.console.ConsoleHelper;
 
 public class GameRunner {
@@ -24,26 +23,10 @@ public class GameRunner {
 		helper.getWriter().printTemplateBoard();
 		while (!GameRules.isGameOver(game.getBoard())) {
 			Player currentPlayer = game.getCurrentPlayer();
-			if (game.getCurrentPlayer().isHuman()) {
-				Position move = helper.getReader().getMoveInput();
-				if (!GameRules.isValidMove(move, game.getBoard())) {
-					System.out.println("Move taken");
-					continue;
-				}
-				game.takeTurn(currentPlayer, move);
-				helper.getWriter().printBoard(game.getBoard());
-			} else {
-				makeComputerMove(game, helper, currentPlayer);
-			}
+			currentPlayer.makeMove(game);
+			helper.getWriter().printBoard(game.getBoard());
 			game.nextTurn();
 		}
 		helper.getWriter().printGameState(game);
-	}
-
-	private static void makeComputerMove(Game game, ConsoleHelper helper,
-			Player currentPlayer) {
-		game.takeTurn(currentPlayer, game.getArtificialIntelligence()
-				.getBestMove(game.getBoard(), currentPlayer));
-		helper.getWriter().printBoard(game.getBoard());
 	}
 }

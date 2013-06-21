@@ -9,19 +9,15 @@ import org.junit.Test;
 
 import source.TTT.Board;
 import source.TTT.GameRules;
-import source.TTT.Player;
 import source.TTT.Position;
 
 public class GameRulesTest {
-	Player player1, player2;
 	GameRules rules;
 	Board board;
 	Position move;
 
 	@Before
 	public void beforeAll() {
-		player1 = new Player("X", "human");
-		player2 = new Player("O", "human");
 		board = new Board();
 		move = new Position(0, 0);
 	}
@@ -30,7 +26,7 @@ public class GameRulesTest {
 	public void isValidMoveReturnTest() {
 		assertTrue(GameRules.isValidMove(move, board));
 
-		board.setSpace(move.row, move.col, player1.getMarker());
+		board.setSpace(move.row, move.col, "X");
 
 		assertFalse(GameRules.isValidMove(move, board));
 	}

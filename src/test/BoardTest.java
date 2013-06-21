@@ -11,23 +11,20 @@ import org.junit.Test;
 
 import source.TTT.Board;
 import source.TTT.Game;
-import source.TTT.GameRules;
-import source.TTT.Player;
 import source.TTT.Position;
+import source.handles.HumanStrategyHandle;
 
 public class BoardTest {
-	Player player1, player2;
+	HumanStrategyHandle humanHandle;
+	
 	Board board;
 	Position move;
 	Game game;
-	GameRules rules;
 
 	@Before
 	public void beforeAll() {
-		player1 = new Player("X", "human");
-		player2 = new Player("O", "human");
 		board = new Board();
-		game = new Game(board, player1, player2);
+		game = new Game(board, null, null);
 		move = new Position(0, 0);
 	}
 
@@ -67,7 +64,7 @@ public class BoardTest {
 	public void getAvailablePositionsLeavesOutMarkedSpaces() {
 		move.row = 0;
 		move.col = 0;
-		game.takeTurn(player1, move);
+		board.setSpace(0, 0, "X");
 
 		ArrayList<Position> moves = board.getAvailablePositions();
 
