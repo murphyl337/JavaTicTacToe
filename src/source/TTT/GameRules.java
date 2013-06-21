@@ -1,9 +1,6 @@
 package source.TTT;
 
 public class GameRules {
-	public GameRules() {
-	}
-
 	public static boolean isValidMove(Position move, Board board) {
 		return (board.getSpace(move.row, move.col).equals(""));
 	}

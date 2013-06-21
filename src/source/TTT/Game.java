@@ -2,13 +2,11 @@ package source.TTT;
 
 public class Game {
 	private Board board;
-	private ArtificialIntelligence artificialIntelligence;
 
 	private Player player1, player2, currentPlayer;
 
 	public Game(Board board, Player player1, Player player2) {
 		this.board = board;
-		this.artificialIntelligence = new ArtificialIntelligence(this);
 		this.player1 = player1;
 		this.player2 = player2;
 		this.currentPlayer = player1;
@@ -20,7 +18,7 @@ public class Game {
 		return getPlayer1();
 	}
 
-	public void takeTurn(Player player, Position move) {
+	public void updateBoard(Player player, Position move) {
 		board.setSpace(move, player.getMarker());
 	}
 
@@ -54,14 +52,6 @@ public class Game {
 
 	public void setCurrentPlayer(Player currentPlayer) {
 		this.currentPlayer = currentPlayer;
-	}
-
-	public ArtificialIntelligence getArtificialIntelligence() {
-		return artificialIntelligence;
-	}
-
-	public void setArtificialIntelligence(ArtificialIntelligence ai) {
-		this.artificialIntelligence = ai;
 	}
 
 }

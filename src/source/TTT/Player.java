@@ -1,22 +1,23 @@
 package source.TTT;
 
+import source.handles.StrategyHandle;
+
 public class Player {
 	private String marker;
-	private String type;
+	private StrategyHandle strategyHandle;
 
-	public Player(String marker, String type) {
-		this.setMarker(marker);
-		this.setType(type);
-	}
-	
-	public boolean isHuman(){
-		return this.type.equals("human");
-	}
-	
-	public boolean isComputer(){
-		return this.type.equals("computer");
+	public Player(String marker, StrategyHandle stratHandle) {
+		this.marker = marker;
+		this.strategyHandle = stratHandle;
 	}
 
+	public void makeMove(Game game){
+		strategyHandle.setGame(game);
+		strategyHandle.setPlayer(this);
+		Position move = strategyHandle.getMove();
+		game.updateBoard(this, move);
+	}
+	
 	public String getMarker() {
 		return marker;
 	}
@@ -25,12 +26,12 @@ public class Player {
 		this.marker = marker;
 	}
 
-	public String getType() {
-		return type;
+	public StrategyHandle getStrategyHandle() {
+		return strategyHandle;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setStrategyHandle(StrategyHandle strategyHandle) {
+		this.strategyHandle = strategyHandle;
 	}
 
 }
