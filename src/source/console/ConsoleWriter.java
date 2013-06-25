@@ -14,6 +14,14 @@ public class ConsoleWriter {
 		System.out.println(sb.toString());
 	}
 	
+	public void printDifficultyOptions(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("Which difficulty for computer players?\n");
+		sb.append("'Easy' or 'Impossible'\n");
+		sb.append("(case does not matter)");
+		System.out.println(sb.toString());
+	}
+	
 	public void printTemplateBoard(){
 		System.out.println("These are the moves you can make: ");
 		StringBuilder sb = new StringBuilder();

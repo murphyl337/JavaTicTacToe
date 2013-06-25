@@ -26,7 +26,9 @@ public class ConsoleHelper {
 	public Game setUpGame() {
 		getWriter().printGreeting();
 		String playerConfig = getReader().getPlayerConfig();
-		ArrayList<Player> players = configFactory.createConfiguration(playerConfig);
+		getWriter().printDifficultyOptions();
+		String difficulty = getReader().getDifficulty();
+		ArrayList<Player> players = configFactory.createConfiguration(playerConfig, difficulty);
 		Board board = new Board();
 		Game game = new Game(board, players.get(0), players.get(1));
 		return game;

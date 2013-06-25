@@ -31,5 +31,15 @@ public class ConsoleValidatorTest {
 		assertFalse(validator.isValidMoveInput("3,3"));
 		assertFalse(validator.isValidMoveInput("11"));
 	}
+	
+	@Test
+	public void validatesDifficultyInput(){
+		assertTrue(validator.isValidDifficultyInput("e"));
+		assertTrue(validator.isValidDifficultyInput("E"));
+		assertTrue(validator.isValidDifficultyInput("I"));
+		assertTrue(validator.isValidDifficultyInput("i"));
+		assertFalse(validator.isValidDifficultyInput("doop"));
+		assertFalse(validator.isValidDifficultyInput("%20"));
+	}
 
 }

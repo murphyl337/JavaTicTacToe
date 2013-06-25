@@ -18,8 +18,8 @@ public class Game {
 		return getPlayer1();
 	}
 
-	public void updateBoard(Player player, Position move) {
-		board.setSpace(move, player.getMarker());
+	public void updateBoard(String marker, Position move) {
+		board.setSpace(move, marker);
 	}
 
 	public void nextTurn() {

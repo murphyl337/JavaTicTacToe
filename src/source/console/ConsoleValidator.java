@@ -15,5 +15,9 @@ public class ConsoleValidator {
 	public boolean isValidMoveInput(String moveString) {
 		return moveString.matches("[0-2],[0-2]");
 	}
+
+	public boolean isValidDifficultyInput(String difficulty) {
+		return (difficulty.equalsIgnoreCase("e") || difficulty.equalsIgnoreCase("i"));
+	}
 	
 }

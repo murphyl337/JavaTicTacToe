@@ -31,7 +31,7 @@ public class MinimaxStrategyHandleTest {
 	@Test
 	public void getMoveReturnsCenterSpaceWhenCornerIsTaken() {
 		Position move = new Position(0,0);
-		game.updateBoard(player1, move);
+		game.updateBoard("X", move);
 		assertEquals(1, minimaxHandle.getMove().row);
 		assertEquals(1, minimaxHandle.getMove().col);
 	}

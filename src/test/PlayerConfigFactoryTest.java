@@ -11,13 +11,18 @@ import source.TTT.Player;
 import source.TTT.PlayerConfigFactory;
 import source.handles.HumanStrategyHandle;
 import source.handles.MinimaxStrategyHandle;
+import source.handles.RandomMoveStrategyHandle;
 
 public class PlayerConfigFactoryTest {
 	PlayerConfigFactory configFactory;
+	MinimaxStrategyHandle minimaxHandle;
+	RandomMoveStrategyHandle randomHandle;
 
 	@Before
 	public void before(){
 		configFactory = new PlayerConfigFactory();
+		minimaxHandle = new MinimaxStrategyHandle();
+		randomHandle = new RandomMoveStrategyHandle();
 	}
 	
 	@Test
@@ -31,7 +36,7 @@ public class PlayerConfigFactoryTest {
 	
 	@Test
 	public void canCreateHVConfig(){
-		ArrayList<Player> players = configFactory.createHVCConfig();
+		ArrayList<Player> players = configFactory.createHVCConfig(minimaxHandle);
 		assertEquals(2, players.size());
 		assertEquals(HumanStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
 		assertEquals(MinimaxStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
@@ -39,7 +44,7 @@ public class PlayerConfigFactoryTest {
 	
 	@Test
 	public void canCreateCVHConfig(){
-		ArrayList<Player> players = configFactory.createCVHConfig();
+		ArrayList<Player> players = configFactory.createCVHConfig(minimaxHandle);
 		assertEquals(2, players.size());
 		assertEquals(MinimaxStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
 		assertEquals(HumanStrategyHandle.class, players.get(1).getStrategyHandle().getClass());
@@ -47,7 +52,7 @@ public class PlayerConfigFactoryTest {
 	
 	@Test
 	public void canCreateCVCConfig(){
-		ArrayList<Player> players = configFactory.createCVCConfig();
+		ArrayList<Player> players = configFactory.createCVCConfig(minimaxHandle);
 		assertEquals(2, players.size());
 		assertEquals(MinimaxStrategyHandle.class, players.get(0).getStrategyHandle().getClass());
 		assertEquals(MinimaxStrategyHandle.class, players.get(1).getStrategyHandle().getClass());

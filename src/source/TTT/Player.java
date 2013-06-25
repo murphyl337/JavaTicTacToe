@@ -11,13 +11,13 @@ public class Player {
 		this.strategyHandle = stratHandle;
 	}
 
-	public void makeMove(Game game){
+	public void makeMove(Game game) {
 		strategyHandle.setGame(game);
 		strategyHandle.setPlayer(this);
 		Position move = strategyHandle.getMove();
-		game.updateBoard(this, move);
+		game.updateBoard(marker, move);
 	}
-	
+
 	public String getMarker() {
 		return marker;
 	}
